@@ -1,0 +1,45 @@
+.container {
+  background: $colorBackgroundBlue;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+.taskbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: $colorTaskBar;
+  width: 100vw;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  .start__btn {
+    cursor: pointer;
+    padding: 2px 10px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    border-left: 3px solid #dfdfdf;
+    border-top: 3px solid #dfdfdf;
+    border-right: 3px solid #4b4b4b;
+    border-bottom: 3px solid #4b4b4b;
+    span {
+      font-weight: bold;
+      letter-spacing: -2px;
+    }
+  }
+  .system__tray {
+    display: flex;
+    align-items: center;
+    padding: 2px 10px;
+    margin-right: 10px;
+    border-left: 2px solid #4b4b4b;
+    border-top: 2px solid #4b4b4b;
+    border-right: 2px solid #dfdfdf;
+    border-bottom: 2px solid #dfdfdf;
+    .time {
+      margin-left: 10px;
+    }
+  }
+}
