@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,16 +8,54 @@
     <link rel="stylesheet" href="/scss/main.css">
     <title>Jacques van Zyl</title>
 </head>
+
 <body>
 
     <div class="container">
-        <div class="shortcut my__computer">
+        <div class="shortcut draggable shortcut__my__computer">
             <img src="/src/images/win95_icons/My Computer.ico" alt="">
             <div class="shortcut__name">My Computer</div>
         </div>
-        <div class="shortcut recycle__bin">
+        <div class="shortcut draggable shortcut__recycle__bin">
             <img src="/src/images/win95_icons/Recycle Bin with paper.ico" alt="">
             <div class="shortcut__name">Recycle Bin</div>
+        </div>
+        <div class="shortcut draggable shortcut__help">
+            <img src="/src/images/win95_icons/Help book.ico" alt="">
+            <div class="shortcut__name">What is this and where am I?</div>
+        </div>
+        <div class="start__menu hidden">
+            <div class="left__text">Windows<span>95</span> </div>
+            <div class="menu">
+                <div class="menu__top">
+                    <div class=" menu__item menu__programs">
+                        <img src="/src/images/win95_icons/Program Folder (16x16px & 32x32px).ico" alt="">
+                        <span>Programs</span>
+                    </div>
+                    <div class=" menu__item menu__documents">
+                        <img src="/src/images/win95_icons/Web-documents folder 2.ico" alt="">
+                        <span>Documents</span>
+                    </div>
+                    <div class=" menu__item menu__find">
+                        <img src="/src/images/win95_icons/Search in sheet (16x16px & 32x32px) (blue).ico" alt="">
+                        <span>Find</span>
+                    </div>
+
+                </div>
+
+                <div class="menu__bottom">
+                    <div class=" menu__item menu__suspend">
+                        <img src="/src/images/win95_icons/Night on computer.ico" alt="">
+                        <span>Suspend</span>
+                    </div>
+                    <div class=" menu__item menu__shutdown">
+                        <img src="/src/images/win95_icons/Turn Off Computer (display only).ico" alt="">
+                        <span>Shut Down...</span>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
         <div class="taskbar">
             <div class="start__btn">
@@ -28,8 +67,38 @@
                 <span class="time">00:00</span>
             </div>
         </div>
+        <div class="help__popup draggable popup">
+            <div class="basic__window__menu">
+                <div class="basic__window_top">
+                    <div class="basic__window__top__left">
+                        <img src="/src/images/win95_icons/Help book.ico" alt="">
+                        <div>What is this and where am I?</div>
+                    </div>
+                    <div class="basic__window__top__right">
+                        <div class="minimize__popup__button popup__button">
+                            <div class="minimize__box"></div>
+                        </div>
+                        <div class="maximize__popup__button popup__button">
+                            <div class="maximize__box"></div>
+                        </div>
+                        <div class="close__popup__button popup__button">&#10006</div>
+                    </div>
+                </div>
+                <div class="basic__window__middle">
+                    <span>File</span>
+                    <span>Edit</span>
+                    <span>View</span>
+                    <span>Help</span>
+                </div>
+            </div>
+            <div class="popup__main_section">
+                <h1>Test</h1>
+            </div>
+        </div>
+
     </div>
-    
+
     <script src="/app.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,71 @@
+.start__menu {
+  display: flex;
+  position: absolute;
+  z-index: 10;
+  bottom: 48px;
+  left: 4px;
+  width: 300px;
+  height: 400px;
+  background-color: $colorTaskBar;
+  border-left: 3px solid $colorLightGray;
+  border-top: 3px solid $colorLightGray;
+  border-right: 3px solid $colorDarkGray;
+  border-bottom: 3px solid $colorDarkGray;
+  .left__text {
+    transform: rotate(-180deg);
+    background-color: $colorDarkGray;
+    writing-mode: vertical-rl;
+    padding: 10px 0;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: $colorTaskBar;
+    span {
+      color: white;
+      font-weight: 500;
+    }
+  }
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  width: 100%;
+
+  .menu__item {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+    span::first-letter {
+      text-decoration: underline;
+    }
+  }
+
+  .menu__item:hover {
+    cursor: default;
+    background-color: blue;
+    color: white;
+  }
+}
+
+.menu__bottom {
+  border-top: 2px solid $colorDarkGray;
+
+  &:before {
+    background: $colorLightGray;
+    height: 2px;
+    content: "";
+    display: block;
+  }
+}
+
+.hidden {
+  display: none;
+}

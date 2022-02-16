@@ -3,11 +3,16 @@
 // COLOURS
 $colorBackgroundBlue: #018282;
 $colorTaskBar: #c3c3c3;
+$colorLightGray: #dfdfdf;
+$colorMediumGray: #808080;
+$colorDarkGray: #4b4b4b;
 
 // FONT
 $font: "sans-serif";
-$fontSize: 1.6rem;
+$fontSize: 1.4rem;
 
 //// IMPORTS
 @import "globals";
 @import "main_desktop";
+@import "start_menu";
+@import "popups";

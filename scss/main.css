@@ -7,8 +7,8 @@
 
 html {
   font-size: 62.5%;
-  font-size: 1.6rem;
-  font: "Arial";
+  font-size: 1.4rem;
+  font-family: "sans-serif";
 }
 
 .container {
@@ -63,6 +63,11 @@ html {
   letter-spacing: -2px;
 }
 
+.taskbar .start__btn:active {
+  -webkit-box-shadow: inset 0px 0px 5px #4b4b4b;
+          box-shadow: inset 0px 0px 5px #4b4b4b;
+}
+
 .taskbar .system__tray {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -87,6 +92,7 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -106,5 +112,208 @@ html {
 .shortcut .shortcut__name {
   color: white;
   font-size: 0.8rem;
+}
+
+.start__menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  z-index: 10;
+  bottom: 48px;
+  left: 4px;
+  width: 300px;
+  height: 400px;
+  background-color: #c3c3c3;
+  border-left: 3px solid #dfdfdf;
+  border-top: 3px solid #dfdfdf;
+  border-right: 3px solid #4b4b4b;
+  border-bottom: 3px solid #4b4b4b;
+}
+
+.start__menu .left__text {
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+  background-color: #4b4b4b;
+  -webkit-writing-mode: vertical-rl;
+      -ms-writing-mode: tb-rl;
+          writing-mode: vertical-rl;
+  padding: 10px 0;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #c3c3c3;
+}
+
+.start__menu .left__text span {
+  color: white;
+  font-weight: 500;
+}
+
+.menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+
+.menu .menu__item {
+  padding: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.menu .menu__item img {
+  width: 32px;
+  height: 32px;
+}
+
+.menu .menu__item span::first-letter {
+  text-decoration: underline;
+}
+
+.menu .menu__item:hover {
+  cursor: default;
+  background-color: blue;
+  color: white;
+}
+
+.menu__bottom {
+  border-top: 2px solid #4b4b4b;
+}
+
+.menu__bottom:before {
+  background: #dfdfdf;
+  height: 2px;
+  content: "";
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+.popup {
+  overflow: scroll;
+  margin: auto;
+  width: 80vw;
+  height: 60vh;
+  border-left: 4px solid #dfdfdf;
+  border-top: 3px solid #dfdfdf;
+  border-right: 4px solid #4b4b4b;
+  border-bottom: 3px solid #4b4b4b;
+}
+
+.popup .basic__window__menu {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.popup .basic__window_top {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #808080;
+}
+
+.popup .basic__window_top .basic__window__top__left {
+  cursor: default;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0 5px;
+  gap: 10px;
+  color: #dfdfdf;
+}
+
+.popup .basic__window_top .basic__window__top__left img {
+  width: 24px;
+  height: 24px;
+}
+
+.popup .basic__window_top .basic__window__top__right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.popup .basic__window_top .basic__window__top__right .popup__button {
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 90%;
+  width: 30px;
+  height: 28px;
+  margin: 5px 1px;
+  background-color: #dfdfdf;
+  border-left: 3px solid #dfdfdf;
+  border-top: 3px solid #dfdfdf;
+  border-right: 3px solid #4b4b4b;
+  border-bottom: 3px solid #4b4b4b;
+}
+
+.popup .basic__window_top .basic__window__top__right .minimize__box {
+  width: 60%;
+  height: 90%;
+  border-bottom: 3px solid black;
+}
+
+.popup .basic__window_top .basic__window__top__right .maximize__box {
+  width: 80%;
+  height: 80%;
+  border: solid black;
+  border-width: 3px 3px 1px 1px;
+}
+
+.popup .basic__window__middle {
+  background-color: #dfdfdf;
+  height: 26px;
+}
+
+.popup .basic__window__middle span {
+  display: inline-block;
+  margin: 0px 5px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.popup .basic__window__middle span::first-letter {
+  text-decoration: underline;
+}
+
+.popup .popup__main_section {
+  overflow: auto;
+  height: 800px;
+  background-color: white;
 }
 /*# sourceMappingURL=main.css.map */

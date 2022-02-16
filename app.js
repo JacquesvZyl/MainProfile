@@ -1,17 +1,15 @@
-// ELEMENT VARIABLES
+// 1. ELEMENT VARIABLES
 const time = document.querySelector(".time");
-const shortcuts = document.querySelectorAll(".shortcut");
+const draggableItems = document.querySelectorAll(".draggable");
 const container = document.querySelector(".container");
-let draggableItem = document.getElementsByClassName("draggable");
-
-//GLOBAL VARIABLES
+const startMenuBtn = document.querySelector(".start__btn");
+const startMenu = document.querySelector(".start__menu");
+const popupCloseBtns = document.querySelectorAll(".close__popup__button");
+const shorcutHelp = document.querySelector(".shortcut__help");
+const popupHelp = document.querySelector(".help__popup");
+// 2. GLOBAL VARIABLES
 let active = false;
-let currentX;
-let currentY;
-let initialX;
-let initialY;
-let xOffset = 0;
-let yOffset = 0;
+let activeItem = null;
 
 // Generate time in taskbar
 function setTime() {
@@ -26,13 +24,21 @@ function setTime() {
   }, 1000);
 }
 
-//// MAKE SHORTCUTS DRAGGABLE ////
+////// 3. FUNCTIONS /////
+
+// 3.1 Random Functions //
+
+function toggleHiddenClass(element) {
+  element.classList.toggle("hidden");
+}
+
+// 3.2 MAKE SHORTCUTS DRAGGABLE //
 
 // if eventTarget is in shotcuts array, add class to that shortcut element so that we can call it later
 function setDraggableClass(eventTarget) {
-  for (const shortcut of shortcuts) {
-    if (eventTarget === shortcut || eventTarget.parentElement === shortcut) {
-      shortcut.classList.add("draggable");
+  for (const item of draggableItems) {
+    if (eventTarget === item || eventTarget.parentElement === item) {
+      item.classList.add("being__dragged");
     }
   }
 }
@@ -41,10 +47,10 @@ function dragStart(e) {
   e.preventDefault();
   setDraggableClass(e.target);
   // this is the item we are interacting with
-  activeItem = document.querySelector(".draggable");
+  activeItem = document.querySelector(".being__dragged");
   if (
-    e.target.classList.contains("draggable") ||
-    e.target.parentElement.classList.contains("draggable")
+    e.target.classList.contains("being__dragged") ||
+    e.target.parentElement.classList.contains("being__dragged")
   ) {
     active = true;
 
@@ -73,7 +79,9 @@ function dragEnd(e) {
     activeItem.initialX = activeItem.currentX;
     activeItem.initialY = activeItem.currentY;
     //removes 'draggable' class
-    shortcuts.forEach((element) => element.classList.remove("draggable"));
+    draggableItems.forEach((element) =>
+      element.classList.remove("being__dragged")
+    );
   }
 
   active = false;
@@ -103,6 +111,7 @@ function setTranslate(xPos, yPos, el) {
   el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
 }
 
+//// EVENT LISTENERS & FUNCTION EXECUTION
 container.addEventListener("touchstart", dragStart, false);
 container.addEventListener("touchend", dragEnd, false);
 container.addEventListener("touchmove", drag, false);
@@ -110,5 +119,24 @@ container.addEventListener("touchmove", drag, false);
 container.addEventListener("mousedown", dragStart, false);
 container.addEventListener("mouseup", dragEnd, false);
 container.addEventListener("mousemove", drag, false);
+container.addEventListener("click", (e) => {
+  // closes start menu if open while cliicking on desktop
+  if (e.target === container && !startMenu.classList.contains("hidden"))
+    toggleHiddenClass(startMenu);
+});
+startMenuBtn.addEventListener("click", () => {
+  toggleHiddenClass(startMenu);
+});
+
+popupCloseBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const parent = e.target.closest(".popup");
+    toggleHiddenClass(parent);
+  });
+});
+
+shorcutHelp.addEventListener("click", () => {
+  toggleHiddenClass(popupHelp);
+});
 
 setTime();

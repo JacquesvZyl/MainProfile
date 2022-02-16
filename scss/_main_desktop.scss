@@ -22,13 +22,16 @@
     margin-left: 10px;
     display: flex;
     align-items: center;
-    border-left: 3px solid #dfdfdf;
-    border-top: 3px solid #dfdfdf;
-    border-right: 3px solid #4b4b4b;
-    border-bottom: 3px solid #4b4b4b;
+    border-left: 3px solid $colorLightGray;
+    border-top: 3px solid $colorLightGray;
+    border-right: 3px solid $colorDarkGray;
+    border-bottom: 3px solid $colorDarkGray;
     span {
       font-weight: bold;
       letter-spacing: -2px;
+    }
+    &:active {
+      box-shadow: inset 0px 0px 5px $colorDarkGray;
     }
   }
   .system__tray {
@@ -36,10 +39,10 @@
     align-items: center;
     padding: 2px 10px;
     margin-right: 10px;
-    border-left: 2px solid #4b4b4b;
-    border-top: 2px solid #4b4b4b;
-    border-right: 2px solid #dfdfdf;
-    border-bottom: 2px solid #dfdfdf;
+    border-left: 2px solid $colorDarkGray;
+    border-top: 2px solid $colorDarkGray;
+    border-right: 2px solid $colorLightGray;
+    border-bottom: 2px solid $colorLightGray;
     .time {
       margin-left: 10px;
     }
@@ -49,6 +52,7 @@
 .shortcut {
   max-width: 150px;
   align-items: center;
+  text-align: center;
   display: flex;
   flex-direction: column;
   margin: 20px 0;
