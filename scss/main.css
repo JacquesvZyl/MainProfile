@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap");
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -81,6 +82,7 @@ html {
 
 .taskbar .taskbar__left .taskbar__popup {
   cursor: pointer;
+  white-space: nowrap;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -246,9 +248,7 @@ html {
 .popup {
   position: absolute;
   top: 10%;
-  left: 10vw;
-  right: 10vw;
-  max-width: 60vw;
+  max-width: 1000px;
   border-left: 4px solid #dfdfdf;
   border-top: 3px solid #dfdfdf;
   border-right: 4px solid #4b4b4b;
@@ -338,24 +338,43 @@ html {
 }
 
 .popup .popup__main__section__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   overflow: scroll;
-  background-color: white;
+  background: -webkit-gradient(linear, left top, left bottom, from(#0100aa), to(#9198e5));
+  background: linear-gradient(#0100aa, #9198e5);
 }
 
 .popup .popup__main_section {
-  height: 60vh;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
 .popup .popup__main_section .popup__main__text {
-  font-size: 0.9rem;
+  color: #ffff;
+  margin: 0 20px;
+  max-width: 500px;
+  font-size: 0.6rem;
+  font-family: "Roboto Mono", monospace;
 }
 
 .popup .popup__main_section .popup__main__text h1 {
   text-align: center;
   margin: 20px 0px;
+}
+
+.popup .popup__main_section .popup__main__text p {
+  letter-spacing: 1.5px;
+  margin: 2px;
+}
+
+.popup .popup__main_section .popup__main__text a {
+  color: white;
 }
 
 .popup .popup__main_section .popup__main__image {
@@ -365,6 +384,7 @@ html {
 
 .popup .popup__main_section .popup__main__image img {
   width: 400px;
+  border-radius: 50%;
 }
 
 .popup .basic__window__bottom__container {
@@ -399,5 +419,22 @@ html {
   border-top: 2px solid #4b4b4b;
   border-right: 2px solid #dfdfdf;
   border-bottom: 2px solid #dfdfdf;
+}
+
+@media screen and (max-width: 1000px) {
+  .popup {
+    width: 90vw;
+    height: 70vh;
+    overflow: hidden;
+  }
+  .popup .popup__main__section__container {
+    overflow: scroll;
+  }
+  .popup .popup__main_section {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
 }
 /*# sourceMappingURL=main.css.map */

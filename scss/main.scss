@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap");
+
 //// GLOBAL VARIABLES
 
 // COLOURS
@@ -11,9 +13,12 @@ $colorBlue: #0100aa;
 // FONT
 $font: "sans-serif";
 $fontSize: 1.4rem;
+$fontRoboto: "Roboto Mono", monospace;
 
 //// IMPORTS
+
 @import "globals";
 @import "main_desktop";
 @import "start_menu";
 @import "popups";
+@import "media";

@@ -1,0 +1,15 @@
+@media screen and (max-width: 1000px) {
+  .popup {
+    width: 90vw;
+    height: 70vh;
+    overflow: hidden;
+
+    .popup__main__section__container {
+      overflow: scroll;
+    }
+
+    .popup__main_section {
+      flex-direction: column;
+    }
+  }
+}

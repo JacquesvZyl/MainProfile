@@ -47,6 +47,7 @@
 
     .taskbar__popup {
       cursor: pointer;
+      white-space: nowrap;
       display: flex;
       font-size: 0.8rem;
       gap: 3px;
