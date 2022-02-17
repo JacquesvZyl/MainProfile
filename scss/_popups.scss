@@ -1,22 +1,19 @@
 .popup {
-  overflow: scroll;
-  margin: auto;
-  width: 80vw;
-  height: 60vh;
+  position: absolute;
+  top: 10%;
+  left: 10vw;
+  right: 10vw;
+  max-width: 60vw;
   border-left: 4px solid $colorLightGray;
   border-top: 3px solid $colorLightGray;
   border-right: 4px solid $colorDarkGray;
   border-bottom: 3px solid $colorDarkGray;
 
-  .basic__window__menu {
-    position: sticky;
-    top: 0;
-  }
   .basic__window_top {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: $colorMediumGray;
+    background-color: $colorBlue;
     .basic__window__top__left {
       cursor: default;
       display: flex;
@@ -53,13 +50,6 @@
         height: 90%;
         border-bottom: 3px solid black;
       }
-
-      .maximize__box {
-        width: 80%;
-        height: 80%;
-        border: solid black;
-        border-width: 3px 3px 1px 1px;
-      }
     }
   }
   .basic__window__middle {
@@ -78,9 +68,51 @@
     }
   }
 
-  .popup__main_section {
-    overflow: auto;
-    height: 800px;
+  .popup__main__section__container {
+    overflow: scroll;
     background-color: white;
+  }
+
+  .popup__main_section {
+    height: 60vh;
+    display: flex;
+    .popup__main__text {
+      h1 {
+        text-align: center;
+        margin: 20px 0px;
+      }
+      font-size: 0.9rem;
+    }
+    .popup__main__image {
+      width: 700px;
+      padding: 20px;
+      img {
+        width: 400px;
+      }
+    }
+  }
+
+  .basic__window__bottom__container {
+    height: 30px;
+    display: flex;
+    gap: 2px;
+    background-color: $colorTaskBar;
+
+    .basic__window__bottom_left {
+      padding-right: 10px;
+    }
+    .basic__window__bottom_rest {
+      flex-grow: 1;
+      display: flex;
+      justify-content: space-between;
+    }
+    .basic__window__bottom_left,
+    .basic__window__bottom_rest {
+      padding-left: 4px;
+      border-left: 2px solid $colorDarkGray;
+      border-top: 2px solid $colorDarkGray;
+      border-right: 2px solid $colorLightGray;
+      border-bottom: 2px solid $colorLightGray;
+    }
   }
 }

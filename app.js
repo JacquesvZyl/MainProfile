@@ -5,11 +5,18 @@ const container = document.querySelector(".container");
 const startMenuBtn = document.querySelector(".start__btn");
 const startMenu = document.querySelector(".start__menu");
 const popupCloseBtns = document.querySelectorAll(".close__popup__button");
+const popupMinimizeBtns = document.querySelectorAll(".minimize__popup__button");
 const shorcutHelp = document.querySelector(".shortcut__help");
 const popupHelp = document.querySelector(".help__popup");
+const allPopups = document.querySelectorAll(".popup");
+const taskbarLeft = document.querySelector(".taskbar__left");
 // 2. GLOBAL VARIABLES
 let active = false;
 let activeItem = null;
+
+////// 3. FUNCTIONS /////
+
+// 3.1 Random Functions //
 
 // Generate time in taskbar
 function setTime() {
@@ -24,12 +31,24 @@ function setTime() {
   }, 1000);
 }
 
-////// 3. FUNCTIONS /////
-
-// 3.1 Random Functions //
-
+// Toggle hidden class
 function toggleHiddenClass(element) {
   element.classList.toggle("hidden");
+}
+
+// truncate Long strings
+function textTruncate(str, length, ending) {
+  if (length == null) {
+    length = 100;
+  }
+  if (ending == null) {
+    ending = "...";
+  }
+  if (str.length > length) {
+    return str.substring(0, length - ending.length) + ending;
+  } else {
+    return str;
+  }
 }
 
 // 3.2 MAKE SHORTCUTS DRAGGABLE //
@@ -111,6 +130,37 @@ function setTranslate(xPos, yPos, el) {
   el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
 }
 
+// 3.3 ADD CURRENT OPEN APP OR DOC TO TASKBAR //
+
+function addRemoveToTaskbar(popup) {
+  // Add to taskbar id popup if visible
+  if (!popup.classList.contains("hidden")) {
+    const icon = popup.querySelector(".popup__icon");
+    const title = popup.querySelector(".popup__title");
+    const html = `<div class="taskbar__popup close" data-parent-class="${
+      popup.classList[0]
+    }">
+  <img src=${icon.src} alt="">
+  <span>${textTruncate(title.innerText, 20)}</span>
+</div>`;
+    taskbarLeft.insertAdjacentHTML("beforeend", html);
+    const currentItem = taskbarLeft.querySelector(
+      `[data-parent-class='${popup.classList[0]}'`
+    );
+    currentItem.addEventListener("click", () => {
+      toggleHiddenClass(popup);
+      currentItem.classList.toggle("minimized");
+    });
+  } else {
+    // Delete from taskbar if popup is hidden
+    const popupTaskbar = taskbarLeft.querySelector(
+      `[data-parent-class='${popup.classList[0]}'`
+    );
+    console.log(popupTaskbar);
+    popupTaskbar.remove();
+  }
+}
+
 //// EVENT LISTENERS & FUNCTION EXECUTION
 container.addEventListener("touchstart", dragStart, false);
 container.addEventListener("touchend", dragEnd, false);
@@ -121,10 +171,13 @@ container.addEventListener("mouseup", dragEnd, false);
 container.addEventListener("mousemove", drag, false);
 container.addEventListener("click", (e) => {
   // closes start menu if open while cliicking on desktop
-  if (e.target === container && !startMenu.classList.contains("hidden"))
+  if (e.target === container && !startMenu.classList.contains("hidden")) {
     toggleHiddenClass(startMenu);
+    startMenuBtn.classList.toggle("clicked");
+  }
 });
 startMenuBtn.addEventListener("click", () => {
+  startMenuBtn.classList.toggle("clicked");
   toggleHiddenClass(startMenu);
 });
 
@@ -132,11 +185,23 @@ popupCloseBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const parent = e.target.closest(".popup");
     toggleHiddenClass(parent);
+    addRemoveToTaskbar(parent);
+  });
+});
+popupMinimizeBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const parent = e.target.closest(".popup");
+    const trayShortcut = taskbarLeft.querySelector(
+      `[data-parent-class='${parent.classList[0]}'`
+    );
+    trayShortcut.classList.toggle("minimized");
+    toggleHiddenClass(parent);
   });
 });
 
-shorcutHelp.addEventListener("click", () => {
+shorcutHelp.addEventListener("dblclick", () => {
   toggleHiddenClass(popupHelp);
+  addRemoveToTaskbar(popupHelp);
 });
 
 setTime();

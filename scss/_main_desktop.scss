@@ -1,4 +1,5 @@
 .container {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background: $colorBackgroundBlue;
@@ -16,22 +17,54 @@
   height: 50px;
   position: absolute;
   bottom: 0;
-  .start__btn {
-    cursor: pointer;
-    padding: 2px 10px;
-    margin-left: 10px;
+
+  .taskbar__left {
     display: flex;
-    align-items: center;
-    border-left: 3px solid $colorLightGray;
-    border-top: 3px solid $colorLightGray;
-    border-right: 3px solid $colorDarkGray;
-    border-bottom: 3px solid $colorDarkGray;
-    span {
-      font-weight: bold;
-      letter-spacing: -2px;
+    gap: 2rem;
+
+    .start__btn {
+      cursor: pointer;
+      padding: 2px 10px;
+      margin-left: 10px;
+      display: flex;
+      align-items: center;
+      border-left: 3px solid $colorLightGray;
+      border-top: 3px solid $colorLightGray;
+      border-right: 3px solid $colorDarkGray;
+      border-bottom: 3px solid $colorDarkGray;
+      span {
+        font-weight: bold;
+        letter-spacing: -2px;
+      }
+      &.clicked {
+        border-left: 3px solid $colorDarkGray;
+        border-top: 3px solid $colorDarkGray;
+        border-right: 4px solid $colorLightGray;
+        border-bottom: 4px solid $colorLightGray;
+        background-color: #e5e5e5;
+      }
     }
-    &:active {
-      box-shadow: inset 0px 0px 5px $colorDarkGray;
+
+    .taskbar__popup {
+      cursor: pointer;
+      display: flex;
+      font-size: 0.8rem;
+      gap: 3px;
+      padding: 2px 5px;
+      align-items: center;
+      border-left: 3px solid $colorDarkGray;
+      border-top: 3px solid $colorDarkGray;
+      border-right: 4px solid $colorLightGray;
+      border-bottom: 4px solid $colorLightGray;
+      max-width: 280px;
+      background-color: #e5e5e5;
+      &.minimized {
+        background-color: $colorTaskBar;
+        border-left: 3px solid $colorLightGray;
+        border-top: 3px solid $colorLightGray;
+        border-right: 3px solid $colorDarkGray;
+        border-bottom: 3px solid $colorDarkGray;
+      }
     }
   }
   .system__tray {
