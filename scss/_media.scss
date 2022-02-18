@@ -1,6 +1,8 @@
 @media screen and (max-width: 1000px) {
-  .taskbar {
+  body {
     font-size: 0.7rem;
+  }
+  .taskbar {
     img {
       transform: scale((0.8));
     }
@@ -31,13 +33,18 @@
   }
 
   .shortcut {
-    font-size: 0.7rem;
     img {
       width: 32px;
       height: 32px;
     }
-    .shortcut__name {
-      font-size: 0.7rem;
-    }
   }
+
+  .start__menu {
+    width: 60vw;
+    height: 60vh;
+  }
+}
+
+.hidden {
+  display: none;
 }

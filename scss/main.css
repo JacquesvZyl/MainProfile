@@ -240,6 +240,7 @@ html {
 
 .popup {
   position: absolute;
+  left: 1%;
   top: 10%;
   max-width: 1000px;
   border-left: 4px solid #dfdfdf;
@@ -259,6 +260,7 @@ html {
       -ms-flex-pack: justify;
           justify-content: space-between;
   background-color: #0100aa;
+  height: 30px;
 }
 
 .popup .basic__window_top .basic__window__top__left {
@@ -266,6 +268,9 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -299,7 +304,6 @@ html {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  height: 90%;
   width: 30px;
   height: 28px;
   margin: 5px 1px;
@@ -341,8 +345,8 @@ html {
       -ms-flex-align: center;
           align-items: center;
   overflow-y: scroll;
-  background: -webkit-gradient(linear, left top, left bottom, from(#0100aa), to(#9198e5));
-  background: linear-gradient(#0100aa, #9198e5);
+  background: -webkit-gradient(linear, left top, left bottom, from(#0100aa), to(#4b58df));
+  background: linear-gradient(#0100aa, #4b58df);
 }
 
 .popup .popup__main_section {
@@ -352,6 +356,7 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  margin: 20px 0;
 }
 
 .popup .popup__main_section .popup__main__text {
@@ -369,7 +374,7 @@ html {
 
 .popup .popup__main_section .popup__main__text p {
   letter-spacing: 1.5px;
-  margin: 2px;
+  margin: 3px 2px;
 }
 
 .popup .popup__main_section .popup__main__text a {
@@ -398,6 +403,9 @@ html {
 
 .popup .basic__window__bottom__container .basic__window__bottom_left {
   padding-right: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .popup .basic__window__bottom__container .basic__window__bottom_rest {
@@ -414,6 +422,9 @@ html {
 
 .popup .basic__window__bottom__container .basic__window__bottom_left,
 .popup .basic__window__bottom__container .basic__window__bottom_rest {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding-left: 4px;
   border-left: 2px solid #4b4b4b;
   border-top: 2px solid #4b4b4b;
@@ -421,8 +432,13 @@ html {
   border-bottom: 2px solid #dfdfdf;
 }
 
+.popup .basic__window__bottom__container .basic__window__bottom_left img,
+.popup .basic__window__bottom__container .basic__window__bottom_rest img {
+  height: 100%;
+}
+
 @media screen and (max-width: 1000px) {
-  .taskbar {
+  body {
     font-size: 0.7rem;
   }
   .taskbar img {
@@ -466,15 +482,17 @@ html {
     width: 200px;
     height: 200px;
   }
-  .shortcut {
-    font-size: 0.7rem;
-  }
   .shortcut img {
     width: 32px;
     height: 32px;
   }
-  .shortcut .shortcut__name {
-    font-size: 0.7rem;
+  .start__menu {
+    width: 60vw;
+    height: 60vh;
   }
+}
+
+.hidden {
+  display: none;
 }
 /*# sourceMappingURL=main.css.map */

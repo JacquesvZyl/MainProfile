@@ -1,5 +1,6 @@
 .popup {
   position: absolute;
+  left: 1%;
   top: 10%;
   max-width: 1000px;
   border-left: 4px solid $colorLightGray;
@@ -12,9 +13,11 @@
     align-items: center;
     justify-content: space-between;
     background-color: $colorBlue;
+    height: 30px;
     .basic__window__top__left {
       cursor: default;
       display: flex;
+      align-items: center;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -35,7 +38,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 90%;
         width: 30px;
         height: 28px;
         margin: 5px 1px;
@@ -74,12 +76,13 @@
     align-items: center;
     //height: 600px;
     overflow-y: scroll;
-    background: linear-gradient($colorBlue, #9198e5);
+    background: linear-gradient($colorBlue, #4b58df);
   }
 
   .popup__main_section {
     display: flex;
     align-items: center;
+    margin: 20px 0;
     .popup__main__text {
       color: #ffff;
       margin: 0 20px;
@@ -93,7 +96,7 @@
       }
       p {
         letter-spacing: 1.5px;
-        margin: 2px;
+        margin: 3px 2px;
       }
       a {
         color: white;
@@ -118,6 +121,7 @@
 
     .basic__window__bottom_left {
       padding-right: 10px;
+      display: flex;
     }
     .basic__window__bottom_rest {
       flex-grow: 1;
@@ -126,11 +130,15 @@
     }
     .basic__window__bottom_left,
     .basic__window__bottom_rest {
+      align-items: center;
       padding-left: 4px;
       border-left: 2px solid $colorDarkGray;
       border-top: 2px solid $colorDarkGray;
       border-right: 2px solid $colorLightGray;
       border-bottom: 2px solid $colorLightGray;
+      img {
+        height: 100%;
+      }
     }
   }
 }
