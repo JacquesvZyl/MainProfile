@@ -1,15 +1,43 @@
 @media screen and (max-width: 1000px) {
+  .taskbar {
+    font-size: 0.7rem;
+    img {
+      transform: scale((0.8));
+    }
+  }
   .popup {
     width: 90vw;
-    height: 70vh;
-    overflow: hidden;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
 
     .popup__main__section__container {
-      overflow: scroll;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .popup__main_section {
+        flex-direction: column;
+        align-items: center;
+        height: 80vh;
+        margin-top: 100px;
+        .popup__main__image {
+          img {
+            width: 200px;
+            height: 200px;
+          }
+        }
+      }
     }
+  }
 
-    .popup__main_section {
-      flex-direction: column;
+  .shortcut {
+    font-size: 0.7rem;
+    img {
+      width: 32px;
+      height: 32px;
+    }
+    .shortcut__name {
+      font-size: 0.7rem;
     }
   }
 }

@@ -9,7 +9,7 @@ const popupMinimizeBtns = document.querySelectorAll(".minimize__popup__button");
 const shorcutHelp = document.querySelector(".shortcut__help");
 const popupHelp = document.querySelector(".help__popup");
 const allPopups = document.querySelectorAll(".popup");
-const taskbarLeft = document.querySelector(".taskbar__left");
+const taskbar = document.querySelector(".taskbar");
 // 2. GLOBAL VARIABLES
 let active = false;
 let activeItem = null;
@@ -55,8 +55,13 @@ function textTruncate(str, length, ending) {
 
 // if eventTarget is in shotcuts array, add class to that shortcut element so that we can call it later
 function setDraggableClass(eventTarget) {
+  console.log(eventTarget.parentElement.parentElement);
   for (const item of draggableItems) {
-    if (eventTarget === item || eventTarget.parentElement === item) {
+    if (
+      eventTarget === item ||
+      eventTarget.parentElement === item ||
+      eventTarget.parentElement.parentElement === item
+    ) {
       item.classList.add("being__dragged");
     }
   }
@@ -69,7 +74,8 @@ function dragStart(e) {
   activeItem = document.querySelector(".being__dragged");
   if (
     e.target.classList.contains("being__dragged") ||
-    e.target.parentElement.classList.contains("being__dragged")
+    e.target.parentElement.classList.contains("being__dragged") ||
+    e.target.parentElement.parentElement.classList.contains("being__dragged")
   ) {
     active = true;
 
@@ -143,8 +149,8 @@ function addRemoveToTaskbar(popup) {
   <img src=${icon.src} alt="">
   <span>${textTruncate(title.innerText, 20)}</span>
 </div>`;
-    taskbarLeft.insertAdjacentHTML("beforeend", html);
-    const currentItem = taskbarLeft.querySelector(
+    startMenuBtn.insertAdjacentHTML("afterend", html);
+    const currentItem = taskbar.querySelector(
       `[data-parent-class='${popup.classList[0]}'`
     );
     currentItem.addEventListener("click", () => {
@@ -153,7 +159,7 @@ function addRemoveToTaskbar(popup) {
     });
   } else {
     // Delete from taskbar if popup is hidden
-    const popupTaskbar = taskbarLeft.querySelector(
+    const popupTaskbar = taskbar.querySelector(
       `[data-parent-class='${popup.classList[0]}'`
     );
     console.log(popupTaskbar);
@@ -162,13 +168,7 @@ function addRemoveToTaskbar(popup) {
 }
 
 //// EVENT LISTENERS & FUNCTION EXECUTION
-container.addEventListener("touchstart", dragStart, false);
-container.addEventListener("touchend", dragEnd, false);
-container.addEventListener("touchmove", drag, false);
 
-container.addEventListener("mousedown", dragStart, false);
-container.addEventListener("mouseup", dragEnd, false);
-container.addEventListener("mousemove", drag, false);
 container.addEventListener("click", (e) => {
   // closes start menu if open while cliicking on desktop
   if (e.target === container && !startMenu.classList.contains("hidden")) {
@@ -191,7 +191,7 @@ popupCloseBtns.forEach((btn) => {
 popupMinimizeBtns.forEach((btn) => {
   btn.addEventListener("click", (e) => {
     const parent = e.target.closest(".popup");
-    const trayShortcut = taskbarLeft.querySelector(
+    const trayShortcut = taskbar.querySelector(
       `[data-parent-class='${parent.classList[0]}'`
     );
     trayShortcut.classList.toggle("minimized");
@@ -203,5 +203,17 @@ shorcutHelp.addEventListener("dblclick", () => {
   toggleHiddenClass(popupHelp);
   addRemoveToTaskbar(popupHelp);
 });
+shorcutHelp.addEventListener("touchstart", () => {
+  toggleHiddenClass(popupHelp);
+  addRemoveToTaskbar(popupHelp);
+});
+
+/* container.addEventListener("touchstart", dragStart, false);
+container.addEventListener("touchend", dragEnd, false);
+container.addEventListener("touchmove", drag, false); */
+
+container.addEventListener("mousedown", dragStart, false);
+container.addEventListener("mouseup", dragEnd, false);
+container.addEventListener("mousemove", drag, false);
 
 setTime();
