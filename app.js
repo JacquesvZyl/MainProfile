@@ -16,10 +16,45 @@ const taskbar = document.querySelector(".taskbar");
 // 2. GLOBAL VARIABLES
 let active = false;
 let activeItem = null;
+const skillsHtml = `
+<div class="left">
+<p>HTML</p>
+<p>CSS</p>
+<p>SCSS & SASS</p>
+<p>JavaScript</p>
+</div>
+<div class="right">
+<p>NodeJs</p>
+<p>Express</p>
+<p>C#</p>
+<p>Unity</p>
+</div>`;
 
 ////// 3. FUNCTIONS /////
 
 // 3.1 Random Functions //
+
+// delayed text Display
+async function delayedText(txt, element, waitTime, isHTML) {
+  await new Promise((resolve) => setTimeout(resolve, waitTime));
+
+  isHTML
+    ? element.insertAdjacentHTML("beforeend", txt)
+    : (element.textContent = txt);
+}
+// Typing animation
+async function typeWriter(txt, element, waitTime, typeSpeed) {
+  let i = 0;
+  function type() {
+    if (i < txt.length) {
+      element.textContent += txt.charAt(i);
+      i++;
+      setTimeout(type, typeSpeed);
+    }
+  }
+  await new Promise((resolve) => setTimeout(resolve, waitTime));
+  type();
+}
 
 // Generate time in taskbar
 function setTime() {
@@ -260,25 +295,13 @@ function skillsPopup(e) {
       <div class="popup__main_section">
           <div class="popup__main__text">
               <p>Microsoft(R) Windows 95</p>
-              <p class="skills__copyright">(C)Copyright Microsoft Corp 1981-1996.</p>
-              <p>C:\\Users\\Jacques>cd skills</p>
-              <p>C:\\Users\\Jacques\\skills>dir</p>
-              <div class="skills_list">
-                  <div class="left">
-                      <p>HTML</p>
-                      <p>CSS</p>
-                      <p>SCSS & SASS</p>
-                      <p>JavaScript</p>
+              <p>(C)Copyright Microsoft Corp 1981-1996.</p>
+              <p class="skills__cd">C:\\Users\\Jacques></p>
+              <p class="skills__dir"></p>
+              <div class="skills__list">
 
-                  </div>
-                  <div class="right">
-                      <p>NodeJs</p>
-                      <p>Express</p>
-                      <p>C#</p>
-                      <p>Unity</p>
-                  </div>
               </div>
-              <p>C:\\Users\\Jacques\\skills></p>
+              <p class='skills__end'></p>
           </div>
       </div>
   </div>
@@ -348,6 +371,46 @@ shortcuts.forEach((shortcut) => {
     shortcut.addEventListener("dblclick", (e) => {
       if (!document.querySelector(".skills__popup")) {
         skillsPopup(e.target);
+
+        /* 
+                      <p class= "skills_win95">Microsoft(R) Windows 95</p>
+              <p class="skills__copyright">(C)Copyright Microsoft Corp 1981-1996.</p>
+              <p class="skills__cd">C:\\Users\\Jacques></p>
+              <p class="skills__dir">C:\\Users\\Jacques\\skills>dir</p>
+              <div class="skills_list">
+                  <div class="left">
+                      <p>HTML</p>
+                      <p>CSS</p>
+                      <p>SCSS & SASS</p>
+                      <p>JavaScript</p>
+        */
+
+        typeWriter(
+          "cd skills",
+          document.querySelector(".skills__cd"),
+          1000,
+          100
+        );
+        delayedText(
+          "C:\\Users\\Jacques\\skills>",
+          document.querySelector(".skills__dir"),
+          2000,
+          false
+        );
+        typeWriter("dir", document.querySelector(".skills__dir"), 2500, 300);
+        delayedText(
+          skillsHtml,
+          document.querySelector(".skills__list"),
+          3400,
+          true
+        );
+        delayedText(
+          "C:\\Users\\Jacques\\skills>",
+          document.querySelector(".skills__end"),
+          3400,
+          false
+        );
+
         addRemoveToTaskbar(document.querySelector(".skills__popup"));
       } else {
         toggleHiddenClass(document.querySelector(".skills__popup"));

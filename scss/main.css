@@ -450,6 +450,7 @@ html {
 
 .skills__popup {
   width: 600px;
+  min-height: 400px;
   overflow: visible;
   background-color: black;
   border-left: 4px solid #dfdfdf;
@@ -472,11 +473,11 @@ html {
   font-size: 1.1rem;
 }
 
-.skills__popup .popup__main__section__container .popup__main__text .skills__copyright {
-  margin-bottom: 20px;
+.skills__popup .popup__main__section__container .popup__main__text .skills__cd {
+  margin-top: 20px;
 }
 
-.skills__popup .popup__main__section__container .popup__main__text .skills_list {
+.skills__popup .popup__main__section__container .popup__main__text .skills__list {
   margin: 20px 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -485,7 +486,7 @@ html {
       justify-content: space-around;
 }
 
-.skills__popup .popup__main__section__container .popup__main__text .skills_list p {
+.skills__popup .popup__main__section__container .popup__main__text .skills__list p {
   color: yellow;
 }
 

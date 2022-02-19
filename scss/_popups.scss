@@ -150,6 +150,7 @@
 
 .skills__popup {
   width: 600px;
+  min-height: 400px;
   overflow: visible;
   background-color: black;
   border-left: 4px solid $colorLightGray;
@@ -167,10 +168,10 @@
         font-family: $fontDos;
         font-size: 1.1rem;
       }
-      .skills__copyright {
-        margin-bottom: 20px;
+      .skills__cd {
+        margin-top: 20px;
       }
-      .skills_list {
+      .skills__list {
         margin: 20px 0;
         display: flex;
         justify-content: space-around;
