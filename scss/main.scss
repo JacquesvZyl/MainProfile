@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap");
+@font-face {
+  font-family: "Windows Command Prompt";
+  src: url("/src/font/windows_command_prompt/Windows-Command-Prompt.woff2")
+      format("woff2"),
+    url("/src/font/windows_command_prompt/Windows-Command-Prompt.woff")
+      format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 //// GLOBAL VARIABLES
 
@@ -12,6 +22,7 @@ $colorBlue: #0100aa;
 
 // FONT
 $font: "MS Sans Serif", sans-serif;
+$fontDos: "windows command prompt", monospace;
 $fontSize: 1.2rem;
 $fontRoboto: "Roboto Mono", monospace;
 

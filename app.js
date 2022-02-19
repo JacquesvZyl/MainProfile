@@ -1,14 +1,17 @@
 // 1. ELEMENT VARIABLES
+let draggableItems = document.querySelectorAll(".draggable");
 const time = document.querySelector(".time");
-const draggableItems = document.querySelectorAll(".draggable");
 const container = document.querySelector(".container");
 const startMenuBtn = document.querySelector(".start__btn");
 const startMenu = document.querySelector(".start__menu");
-const popupCloseBtns = document.querySelectorAll(".close__popup__button");
-const popupMinimizeBtns = document.querySelectorAll(".minimize__popup__button");
+const popupCloseBtns = document.getElementsByClassName(".close__popup__button");
+const popupMinimizeBtns = document.getElementsByClassName(
+  ".minimize__popup__button"
+);
+const shortcuts = document.querySelectorAll(".shortcut");
 const shorcutHelp = document.querySelector(".shortcut__help");
 const popupHelp = document.querySelector(".help__popup");
-const allPopups = document.querySelectorAll(".popup");
+const allPopups = document.getElementsByClassName(".popup");
 const taskbar = document.querySelector(".taskbar");
 // 2. GLOBAL VARIABLES
 let active = false;
@@ -55,7 +58,7 @@ function textTruncate(str, length, ending) {
 
 // if eventTarget is in shotcuts array, add class to that shortcut element so that we can call it later
 function setDraggableClass(eventTarget) {
-  console.log(eventTarget.parentElement.parentElement);
+  draggableItems = document.querySelectorAll(".draggable");
   for (const item of draggableItems) {
     if (
       eventTarget === item ||
@@ -140,7 +143,7 @@ function setTranslate(xPos, yPos, el) {
 
 function addRemoveToTaskbar(popup) {
   // Add to taskbar id popup if visible
-  if (!popup.classList.contains("hidden")) {
+  if (popup && !popup.classList.contains("hidden")) {
     const icon = popup.querySelector(".popup__icon");
     const title = popup.querySelector(".popup__title");
     const html = `<div class="taskbar__popup close" data-parent-class="${
@@ -158,13 +161,129 @@ function addRemoveToTaskbar(popup) {
       currentItem.classList.toggle("minimized");
     });
   } else {
-    // Delete from taskbar if popup is hidden
+    // Delete from taskbar if popup is hidden or removed
     const popupTaskbar = taskbar.querySelector(
       `[data-parent-class='${popup.classList[0]}'`
     );
-    console.log(popupTaskbar);
     popupTaskbar.remove();
   }
+}
+
+// 3.4 POPUP FUNCTIONS
+function whoAmiPopup(e) {
+  const eventTarget = e.closest(".shortcut");
+  const title = eventTarget.querySelector(".shortcut__title");
+  const icon = eventTarget.querySelector(".shortcut__icon");
+  if (!document.querySelector(".help__popup")) {
+    html = `<div class="help__popup draggable popup">
+  <div class="basic__window__top__container">
+      <div class="basic__window_top">
+          <div class="basic__window__top__left">
+              <img class="popup__icon" src="${icon.src}" alt="">
+              <div class="popup__title">${title.innerText}</div>
+          </div>
+          <div class="basic__window__top__right">
+              <div class="minimize__popup__button popup__button">
+                  <div class="minimize__box"></div>
+              </div>
+              <div class="close__popup__button popup__button">&#10006</div>
+          </div>
+      </div>
+      <div class="basic__window__middle">
+          <span>File</span>
+          <span>Edit</span>
+          <span>View</span>
+          <span>Help</span>
+      </div>
+  </div>
+
+  <div class="popup__main__section__container">
+      <div class="popup__main_section">
+          <div class="popup__main__text">
+              <h1>Hi! I'm Jacques</h1>
+              <p>I'm a 36 year old self-taught front-end developer. Originally from Cape Town, South Africa,
+                  I'm
+                  currently living in Bangkok,
+                  Thailand with my wonderful wife since late 2020</p>
+              <p>In 2020 I was laid off from my job as an Application support engineer. I thought to myself
+                  that this was the perfect opportunity to change my career path to something that I actually
+                  enjoy...development!</p>
+
+              <p>I have since taught myself the Unity engine and C# for game Development, mostly for fun and
+                  out of curiosity.</p>
+              <p>One of my android games were actually <a target="_blank"
+                      href="https://www.pocketgamer.com/golf-in-60-seconds/">nominated for best sport game of
+                      2021 on PocketGamer.com.</a> </p>
+              <p>I'm currently laser focused on web development and taught myself HTML, CSS, JavaScript,
+                  Nodejs with express, and mongoDB.</p>
+              <p>I'm fascinated with creating content and user experiences with code.</p>
+          </div>
+          <div class="popup__main__image">
+              <img src="./src/images/other_images/Jacques.jpg" alt="">
+          </div>
+      </div>
+  </div>
+  <div class="basic__window__bottom__container">
+      <div class="basic__window__bottom_left">1 object(s)</div>
+      <div class="basic__window__bottom_rest">
+          <div class="basic__window__bottom__rest__text">352 bytes</div>
+          <img src="/src/images/win95_icons/3lines.png" alt="">
+      </div>
+  </div>
+</div>`;
+
+    container.insertAdjacentHTML("beforeend", html);
+  }
+}
+
+function skillsPopup(e) {
+  const eventTarget = e.closest(".shortcut");
+  const title = eventTarget.querySelector(".shortcut__title");
+  const icon = eventTarget.querySelector(".shortcut__icon");
+  html = `<div class="skills__popup draggable popup">
+  <div class="basic__window__top__container">
+      <div class="basic__window_top">
+          <div class="basic__window__top__left">
+              <img class="popup__icon" src="${icon.src}" alt="">
+              <div class="popup__title">${title.innerText}</div>
+          </div>
+          <div class="basic__window__top__right">
+              <div class="minimize__popup__button popup__button">
+                  <div class="minimize__box"></div>
+              </div>
+              <div class="close__popup__button popup__button">&#10006</div>
+          </div>
+      </div>
+  </div>
+
+  <div class="popup__main__section__container">
+      <div class="popup__main_section">
+          <div class="popup__main__text">
+              <p>Microsoft(R) Windows 95</p>
+              <p class="skills__copyright">(C)Copyright Microsoft Corp 1981-1996.</p>
+              <p>C:\\Users\\Jacques>cd skills</p>
+              <p>C:\\Users\\Jacques\\skills>dir</p>
+              <div class="skills_list">
+                  <div class="left">
+                      <p>HTML</p>
+                      <p>CSS</p>
+                      <p>SCSS & SASS</p>
+                      <p>JavaScript</p>
+
+                  </div>
+                  <div class="right">
+                      <p>NodeJs</p>
+                      <p>Express</p>
+                      <p>C#</p>
+                      <p>Unity</p>
+                  </div>
+              </div>
+              <p>C:\\Users\\Jacques\\skills></p>
+          </div>
+      </div>
+  </div>
+</div>`;
+  container.insertAdjacentHTML("beforeend", html);
 }
 
 //// EVENT LISTENERS & FUNCTION EXECUTION
@@ -181,31 +300,68 @@ startMenuBtn.addEventListener("click", () => {
   toggleHiddenClass(startMenu);
 });
 
-popupCloseBtns.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const parent = e.target.closest(".popup");
-    toggleHiddenClass(parent);
-    addRemoveToTaskbar(parent);
-  });
-});
-popupMinimizeBtns.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    const parent = e.target.closest(".popup");
-    const trayShortcut = taskbar.querySelector(
-      `[data-parent-class='${parent.classList[0]}'`
-    );
-    trayShortcut.classList.toggle("minimized");
-    toggleHiddenClass(parent);
-  });
-});
-
-shorcutHelp.addEventListener("dblclick", () => {
-  toggleHiddenClass(popupHelp);
-  addRemoveToTaskbar(popupHelp);
+/* shorcutHelp.addEventListener("dblclick", (e) => {
+  console.log("dbl");
+  if (!document.querySelector(".help__popup")) {
+    whoAmiPopup(e.target);
+    const popup = document.querySelector(".help__popup");
+    addRemoveToTaskbar(popup);
+  } else {
+    const popup = document.querySelector(".help__popup");
+    toggleHiddenClass(popup);
+  }
 });
 shorcutHelp.addEventListener("touchstart", () => {
-  toggleHiddenClass(popupHelp);
-  addRemoveToTaskbar(popupHelp);
+  if (!document.querySelector(".help__popup")) {
+    whoAmiPopup(e.target);
+    const popup = document.querySelector(".help__popup");
+    addRemoveToTaskbar(popup);
+  } else {
+    const popup = document.querySelector(".help__popup");
+    toggleHiddenClass(popup);
+  }
+}); */
+
+shortcuts.forEach((shortcut) => {
+  console.log(shortcut);
+  // Setting event listener for WHO AM I / Skills shortcut
+  if (shortcut.classList.contains("shortcut__help")) {
+    shortcut.addEventListener("dblclick", (e) => {
+      if (!document.querySelector(".help__popup")) {
+        whoAmiPopup(e.target);
+        addRemoveToTaskbar(document.querySelector(".help__popup"));
+      } else {
+        toggleHiddenClass(document.querySelector(".help__popup"));
+      }
+    });
+    shortcut.addEventListener("touchstart", (e) => {
+      if (!document.querySelector(".help__popup")) {
+        whoAmiPopup(e.target);
+        addRemoveToTaskbar(document.querySelector(".help__popup"));
+      } else {
+        toggleHiddenClass(document.querySelector(".help__popup"));
+      }
+    });
+  }
+  // Setting up event listener for SKILLS shortcut
+  if (shortcut.classList.contains("shortcut__skills")) {
+    shortcut.addEventListener("dblclick", (e) => {
+      if (!document.querySelector(".skills__popup")) {
+        skillsPopup(e.target);
+        addRemoveToTaskbar(document.querySelector(".skills__popup"));
+      } else {
+        toggleHiddenClass(document.querySelector(".skills__popup"));
+      }
+    });
+    shortcut.addEventListener("touchstart", (e) => {
+      if (!document.querySelector(".skills__popup")) {
+        skillsPopup(e.target);
+        addRemoveToTaskbar(document.querySelector(".skills__popup"));
+      } else {
+        toggleHiddenClass(document.querySelector(".skills__popup"));
+      }
+    });
+  }
 });
 
 /* container.addEventListener("touchstart", dragStart, false);
@@ -215,5 +371,35 @@ container.addEventListener("touchmove", drag, false); */
 container.addEventListener("mousedown", dragStart, false);
 container.addEventListener("mouseup", dragEnd, false);
 container.addEventListener("mousemove", drag, false);
+
+document.addEventListener("click", (e) => {
+  console.log(e.target);
+  // adding event listener to dynamic popup close btns
+  if (
+    e.target.classList.contains("close__popup__button") ||
+    e.target.parentElement.classList.contains("close__popup__button")
+  ) {
+    const parent = e.target.closest(".popup");
+    const trayShortcut = taskbar.querySelector(
+      `[data-parent-class='${parent.classList[0]}'`
+    );
+    trayShortcut.remove();
+    parent.remove();
+  }
+
+  // adding event listener to dynamic popup minimize btns
+  if (
+    e.target.classList.contains("minimize__popup__button") ||
+    e.target.parentElement.classList.contains("minimize__popup__button")
+  ) {
+    console.log(e.target);
+    const parent = e.target.closest(".popup");
+    const trayShortcut = taskbar.querySelector(
+      `[data-parent-class='${parent.classList[0]}'`
+    );
+    trayShortcut.classList.toggle("minimized");
+    toggleHiddenClass(parent);
+  }
+});
 
 setTime();

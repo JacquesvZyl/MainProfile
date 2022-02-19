@@ -76,7 +76,6 @@
     align-items: center;
     //height: 600px;
     overflow-y: scroll;
-    background: linear-gradient($colorBlue, #4b58df);
   }
 
   .popup__main_section {
@@ -138,6 +137,46 @@
       border-bottom: 2px solid $colorLightGray;
       img {
         height: 100%;
+      }
+    }
+  }
+}
+
+//Specific popup settings
+
+.help__popup {
+  background: linear-gradient($colorBlue, #4b58df);
+}
+
+.skills__popup {
+  width: 600px;
+  overflow: visible;
+  background-color: black;
+  border-left: 4px solid $colorLightGray;
+  border-top: 4px solid $colorLightGray;
+  border-right: 4px solid $colorLightGray;
+  border-bottom: 4px solid $colorLightGray;
+  .popup__main__section__container {
+    overflow-y: visible;
+    .popup__main_section {
+      margin-left: 0;
+    }
+    .popup__main__text {
+      p {
+        color: $colorLightGray;
+        font-family: $fontDos;
+        font-size: 1.1rem;
+      }
+      .skills__copyright {
+        margin-bottom: 20px;
+      }
+      .skills_list {
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-around;
+        p {
+          color: yellow;
+        }
       }
     }
   }

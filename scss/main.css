@@ -1,4 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;600&display=swap");
+@font-face {
+  font-family: "Windows Command Prompt";
+  src: url("/src/font/windows_command_prompt/Windows-Command-Prompt.woff2") format("woff2"), url("/src/font/windows_command_prompt/Windows-Command-Prompt.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -142,9 +150,9 @@ html {
   height: 64px;
 }
 
-.shortcut .shortcut__name {
+.shortcut .shortcut__title {
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .start__menu {
@@ -345,8 +353,6 @@ html {
       -ms-flex-align: center;
           align-items: center;
   overflow-y: scroll;
-  background: -webkit-gradient(linear, left top, left bottom, from(#0100aa), to(#4b58df));
-  background: linear-gradient(#0100aa, #4b58df);
 }
 
 .popup .popup__main_section {
@@ -435,6 +441,52 @@ html {
 .popup .basic__window__bottom__container .basic__window__bottom_left img,
 .popup .basic__window__bottom__container .basic__window__bottom_rest img {
   height: 100%;
+}
+
+.help__popup {
+  background: -webkit-gradient(linear, left top, left bottom, from(#0100aa), to(#4b58df));
+  background: linear-gradient(#0100aa, #4b58df);
+}
+
+.skills__popup {
+  width: 600px;
+  overflow: visible;
+  background-color: black;
+  border-left: 4px solid #dfdfdf;
+  border-top: 4px solid #dfdfdf;
+  border-right: 4px solid #dfdfdf;
+  border-bottom: 4px solid #dfdfdf;
+}
+
+.skills__popup .popup__main__section__container {
+  overflow-y: visible;
+}
+
+.skills__popup .popup__main__section__container .popup__main_section {
+  margin-left: 0;
+}
+
+.skills__popup .popup__main__section__container .popup__main__text p {
+  color: #dfdfdf;
+  font-family: "windows command prompt", monospace;
+  font-size: 1.1rem;
+}
+
+.skills__popup .popup__main__section__container .popup__main__text .skills__copyright {
+  margin-bottom: 20px;
+}
+
+.skills__popup .popup__main__section__container .popup__main__text .skills_list {
+  margin: 20px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.skills__popup .popup__main__section__container .popup__main__text .skills_list p {
+  color: yellow;
 }
 
 @media screen and (max-width: 1000px) {
