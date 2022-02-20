@@ -141,6 +141,7 @@ function dragEnd(e) {
   if (activeItem !== null) {
     activeItem.initialX = activeItem.currentX;
     activeItem.initialY = activeItem.currentY;
+
     //removes 'draggable' class
     draggableItems.forEach((element) =>
       element.classList.remove("being__dragged")
@@ -324,10 +325,13 @@ startMenuBtn.addEventListener("click", () => {
 });
 
 shortcuts.forEach((shortcut) => {
-  console.log(shortcut);
   // Setting event listener for WHO AM I / Skills shortcut
   if (shortcut.classList.contains("shortcut__help")) {
     shortcut.addEventListener("click", (e) => {
+      if (!startMenu.classList.contains("hidden")) {
+        startMenuBtn.classList.toggle("clicked");
+        toggleHiddenClass(startMenu);
+      }
       if (!document.querySelector(".help__popup")) {
         whoAmiPopup(e.target);
         addRemoveToTaskbar(document.querySelector(".help__popup"));
@@ -401,7 +405,6 @@ container.addEventListener("mouseup", dragEnd, false);
 container.addEventListener("mousemove", drag, false);
 
 document.addEventListener("click", (e) => {
-  console.log(e.target);
   // adding event listener to dynamic popup close btns
   if (
     e.target.classList.contains("close__popup__button") ||
@@ -420,7 +423,6 @@ document.addEventListener("click", (e) => {
     e.target.classList.contains("minimize__popup__button") ||
     e.target.parentElement.classList.contains("minimize__popup__button")
   ) {
-    console.log(e.target);
     const parent = e.target.closest(".popup");
     const trayShortcut = taskbar.querySelector(
       `[data-parent-class='${parent.classList[0]}'`

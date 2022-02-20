@@ -183,3 +183,7 @@
     }
   }
 }
+
+.being__dragged {
+  pointer-events: none;
+}
