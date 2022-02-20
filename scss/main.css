@@ -498,10 +498,9 @@ html {
   color: yellow;
 }
 
-.being__dragged {
+/* .being__dragged {
   pointer-events: none;
-}
-
+} */
 @media screen and (max-width: 1000px) {
   .taskbar {
     font-size: 00.7rem;

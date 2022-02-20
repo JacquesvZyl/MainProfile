@@ -4,16 +4,13 @@ const time = document.querySelector(".time");
 const container = document.querySelector(".container");
 const startMenuBtn = document.querySelector(".start__btn");
 const startMenu = document.querySelector(".start__menu");
-const popupCloseBtns = document.getElementsByClassName(".close__popup__button");
-const popupMinimizeBtns = document.getElementsByClassName(
-  ".minimize__popup__button"
-);
 const shortcuts = document.querySelectorAll(".shortcut");
 const shorcutHelp = document.querySelector(".shortcut__help");
 const popupHelp = document.querySelector(".help__popup");
 const allPopups = document.getElementsByClassName(".popup");
 const taskbar = document.querySelector(".taskbar");
 // 2. GLOBAL VARIABLES
+let dragMovement = 0;
 let active = false;
 let activeItem = null;
 const skillsHtml = `
@@ -33,6 +30,14 @@ const skillsHtml = `
 ////// 3. FUNCTIONS /////
 
 // 3.1 Random Functions //
+
+function cancelBubbleEvent(e) {
+  if (e) {
+    e.stopPropagation();
+  } else {
+    window.event.cancelBubble = true;
+  }
+}
 
 // delayed text Display
 async function delayedText(txt, element, waitTime, isHTML) {
@@ -101,48 +106,50 @@ function setDraggableClass(eventTarget) {
       eventTarget.parentElement.parentElement === item
     ) {
       item.classList.add("being__dragged");
+      return item;
     }
   }
 }
 
 function dragStart(e) {
   e.preventDefault();
-  setDraggableClass(e.target);
+  dragMovement = 0;
   // this is the item we are interacting with
-  activeItem = document.querySelector(".being__dragged");
-  if (
-    e.target.classList.contains("being__dragged") ||
-    e.target.parentElement.classList.contains("being__dragged") ||
-    e.target.parentElement.parentElement.classList.contains("being__dragged")
-  ) {
+  activeItem = setDraggableClass(e.target);
+  if (activeItem && activeItem.classList.contains("draggable")) {
     active = true;
-
-    if (activeItem !== null) {
-      if (!activeItem.xOffset) {
-        activeItem.xOffset = 0;
-      }
-
-      if (!activeItem.yOffset) {
-        activeItem.yOffset = 0;
-      }
-
-      if (e.type === "touchstart") {
-        activeItem.initialX = e.touches[0].clientX - activeItem.xOffset;
-        activeItem.initialY = e.touches[0].clientY - activeItem.yOffset;
-      } else {
-        activeItem.initialX = e.clientX - activeItem.xOffset;
-        activeItem.initialY = e.clientY - activeItem.yOffset;
-      }
+    if (!activeItem.xOffset) {
+      activeItem.xOffset = 0;
     }
+
+    if (!activeItem.yOffset) {
+      activeItem.yOffset = 0;
+    }
+
+    activeItem.initialX = e.clientX - activeItem.xOffset;
+    activeItem.initialY = e.clientY - activeItem.yOffset;
+  }
+}
+
+function drag(e) {
+  if (active) {
+    //adding to dragMovement var when dragged. Ths variable can then be used later to prevent aa click event to trigger after drag
+    dragMovement++;
+
+    activeItem.xOffset = activeItem.currentX = e.clientX - activeItem.initialX;
+    activeItem.yOffset = activeItem.currentY = e.clientY - activeItem.initialY;
+
+    setTranslate(activeItem.currentX, activeItem.currentY, activeItem);
   }
 }
 
 function dragEnd(e) {
-  if (activeItem !== null) {
+  if (activeItem) {
     activeItem.initialX = activeItem.currentX;
     activeItem.initialY = activeItem.currentY;
 
     //removes 'draggable' class
+    setTimeout(() => {});
     draggableItems.forEach((element) =>
       element.classList.remove("being__dragged")
     );
@@ -150,25 +157,6 @@ function dragEnd(e) {
 
   active = false;
   activeItem = null;
-}
-
-function drag(e) {
-  if (active) {
-    if (e.type === "touchmove") {
-      e.preventDefault();
-
-      activeItem.currentX = e.touches[0].clientX - activeItem.initialX;
-      activeItem.currentY = e.touches[0].clientY - activeItem.initialY;
-    } else {
-      activeItem.currentX = e.clientX - activeItem.initialX;
-      activeItem.currentY = e.clientY - activeItem.initialY;
-    }
-
-    activeItem.xOffset = activeItem.currentX;
-    activeItem.yOffset = activeItem.currentY;
-
-    setTranslate(activeItem.currentX, activeItem.currentY, activeItem);
-  }
 }
 
 function setTranslate(xPos, yPos, el) {
@@ -328,69 +316,55 @@ shortcuts.forEach((shortcut) => {
   // Setting event listener for WHO AM I / Skills shortcut
   if (shortcut.classList.contains("shortcut__help")) {
     shortcut.addEventListener("click", (e) => {
-      if (!startMenu.classList.contains("hidden")) {
-        startMenuBtn.classList.toggle("clicked");
-        toggleHiddenClass(startMenu);
-      }
-      if (!document.querySelector(".help__popup")) {
-        whoAmiPopup(e.target);
-        addRemoveToTaskbar(document.querySelector(".help__popup"));
-      } else {
-        toggleHiddenClass(document.querySelector(".help__popup"));
-        const trayShortcut = taskbar.querySelector(
-          `[data-parent-class='${
-            document.querySelector(".help__popup").classList[0]
-          }'`
-        );
-        trayShortcut.classList.toggle("minimized");
+      if (dragMovement <= 10) {
+        if (!startMenu.classList.contains("hidden")) {
+          startMenuBtn.classList.toggle("clicked");
+          toggleHiddenClass(startMenu);
+        }
+        if (!document.querySelector(".help__popup")) {
+          whoAmiPopup(e.target);
+          addRemoveToTaskbar(document.querySelector(".help__popup"));
+        } else {
+          toggleHiddenClass(document.querySelector(".help__popup"));
+          const trayShortcut = taskbar.querySelector(
+            `[data-parent-class='${
+              document.querySelector(".help__popup").classList[0]
+            }'`
+          );
+          trayShortcut.classList.toggle("minimized");
+        }
       }
     });
   }
   // Setting up event listener for SKILLS shortcut
   if (shortcut.classList.contains("shortcut__skills")) {
     shortcut.addEventListener("click", (e) => {
-      if (!startMenu.classList.contains("hidden")) {
-        startMenuBtn.classList.toggle("clicked");
-        toggleHiddenClass(startMenu);
-      }
-      if (!document.querySelector(".skills__popup")) {
-        skillsPopup(e.target);
-
-        typeWriter(
-          "cd skills",
-          document.querySelector(".skills__cd"),
-          1000,
-          100
-        );
-        delayedText(
-          "C:\\Users\\Jacques\\skills>",
-          document.querySelector(".skills__dir"),
-          2000,
-          false
-        );
-        typeWriter("dir", document.querySelector(".skills__dir"), 2500, 300);
-        delayedText(
-          skillsHtml,
-          document.querySelector(".skills__list"),
-          3400,
-          true
-        );
-        delayedText(
-          "C:\\Users\\Jacques\\skills>",
-          document.querySelector(".skills__end"),
-          3400,
-          false
-        );
-
-        addRemoveToTaskbar(document.querySelector(".skills__popup"));
-      } else {
-        toggleHiddenClass(document.querySelector(".skills__popup"));
-        const trayShortcut = taskbar.querySelector(
-          `[data-parent-class='${
-            document.querySelector(".skills__popup").classList[0]
-          }'`
-        );
-        trayShortcut.classList.toggle("minimized");
+      if (dragMovement <= 10) {
+        if (!startMenu.classList.contains("hidden")) {
+          startMenuBtn.classList.toggle("clicked");
+          toggleHiddenClass(startMenu);
+        }
+        if (!document.querySelector(".skills__popup")) {
+          skillsPopup(e.target);
+          const skillsCd = document.querySelector(".skills__cd");
+          const skillsDr = document.querySelector(".skills__dir");
+          const skillsList = document.querySelector(".skills__list");
+          const skillsEnd = document.querySelector(".skills__end");
+          typeWriter("cd skills", skillsCd, 1000, 100);
+          delayedText("C:\\Users\\Jacques\\skills>", skillsDr, 2000, false);
+          typeWriter("dir", skillsDr, 2500, 300);
+          delayedText(skillsHtml, skillsList, 3400, true);
+          delayedText("C:\\Users\\Jacques\\skills>", skillsEnd, 3400, false);
+          addRemoveToTaskbar(document.querySelector(".skills__popup"));
+        } else {
+          toggleHiddenClass(document.querySelector(".skills__popup"));
+          const trayShortcut = taskbar.querySelector(
+            `[data-parent-class='${
+              document.querySelector(".skills__popup").classList[0]
+            }'`
+          );
+          trayShortcut.classList.toggle("minimized");
+        }
       }
     });
   }
