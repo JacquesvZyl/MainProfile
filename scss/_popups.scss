@@ -151,7 +151,7 @@
 .skills__popup {
   width: 600px;
   min-height: 400px;
-  overflow: visible;
+  overflow: hidden;
   background-color: black;
   border-left: 4px solid $colorLightGray;
   border-top: 4px solid $colorLightGray;
@@ -163,6 +163,7 @@
       margin-left: 0;
     }
     .popup__main__text {
+      margin: 0 5px;
       p {
         color: $colorLightGray;
         font-family: $fontDos;

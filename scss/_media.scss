@@ -1,8 +1,6 @@
 @media screen and (max-width: 1000px) {
-  body {
-    font-size: 0.7rem;
-  }
   .taskbar {
+    font-size: 00.7rem;
     img {
       transform: scale((0.8));
     }
@@ -32,16 +30,33 @@
     }
   }
 
-  .shortcut {
-    img {
-      width: 32px;
-      height: 32px;
+  .shortcut__container {
+    .shortcut {
+      font-size: 0.7rem;
+      img {
+        width: 32px;
+        height: 32px;
+      }
     }
   }
 
   .start__menu {
     width: 60vw;
     height: 60vh;
+  }
+  .skills__popup {
+    height: 50vh;
+    .popup__main__section__container {
+      justify-content: flex-start;
+      .popup__main_section {
+        margin-top: 10px;
+        .popup__main__text {
+          p {
+            //font-size: 0.8rem;
+          }
+        }
+      }
+    }
   }
 }
 

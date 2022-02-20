@@ -79,21 +79,23 @@
   }
 }
 
-.shortcut {
-  max-width: 150px;
-  align-items: center;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0;
-  cursor: pointer;
+.shortcut__container {
+  .shortcut {
+    max-width: 150px;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    cursor: pointer;
 
-  img {
-    width: 64px;
-    height: 64px;
-  }
-  .shortcut__title {
-    color: white;
-    font-size: 0.9rem;
+    img {
+      width: 64px;
+      height: 64px;
+    }
+    .shortcut__title {
+      color: white;
+      font-size: 0.9rem;
+    }
   }
 }

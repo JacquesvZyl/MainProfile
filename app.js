@@ -323,67 +323,34 @@ startMenuBtn.addEventListener("click", () => {
   toggleHiddenClass(startMenu);
 });
 
-/* shorcutHelp.addEventListener("dblclick", (e) => {
-  console.log("dbl");
-  if (!document.querySelector(".help__popup")) {
-    whoAmiPopup(e.target);
-    const popup = document.querySelector(".help__popup");
-    addRemoveToTaskbar(popup);
-  } else {
-    const popup = document.querySelector(".help__popup");
-    toggleHiddenClass(popup);
-  }
-});
-shorcutHelp.addEventListener("touchstart", () => {
-  if (!document.querySelector(".help__popup")) {
-    whoAmiPopup(e.target);
-    const popup = document.querySelector(".help__popup");
-    addRemoveToTaskbar(popup);
-  } else {
-    const popup = document.querySelector(".help__popup");
-    toggleHiddenClass(popup);
-  }
-}); */
-
 shortcuts.forEach((shortcut) => {
   console.log(shortcut);
   // Setting event listener for WHO AM I / Skills shortcut
   if (shortcut.classList.contains("shortcut__help")) {
-    shortcut.addEventListener("dblclick", (e) => {
+    shortcut.addEventListener("click", (e) => {
       if (!document.querySelector(".help__popup")) {
         whoAmiPopup(e.target);
         addRemoveToTaskbar(document.querySelector(".help__popup"));
       } else {
         toggleHiddenClass(document.querySelector(".help__popup"));
-      }
-    });
-    shortcut.addEventListener("touchstart", (e) => {
-      if (!document.querySelector(".help__popup")) {
-        whoAmiPopup(e.target);
-        addRemoveToTaskbar(document.querySelector(".help__popup"));
-      } else {
-        toggleHiddenClass(document.querySelector(".help__popup"));
+        const trayShortcut = taskbar.querySelector(
+          `[data-parent-class='${
+            document.querySelector(".help__popup").classList[0]
+          }'`
+        );
+        trayShortcut.classList.toggle("minimized");
       }
     });
   }
   // Setting up event listener for SKILLS shortcut
   if (shortcut.classList.contains("shortcut__skills")) {
-    shortcut.addEventListener("dblclick", (e) => {
+    shortcut.addEventListener("click", (e) => {
+      if (!startMenu.classList.contains("hidden")) {
+        startMenuBtn.classList.toggle("clicked");
+        toggleHiddenClass(startMenu);
+      }
       if (!document.querySelector(".skills__popup")) {
         skillsPopup(e.target);
-
-        /* 
-                      <p class= "skills_win95">Microsoft(R) Windows 95</p>
-              <p class="skills__copyright">(C)Copyright Microsoft Corp 1981-1996.</p>
-              <p class="skills__cd">C:\\Users\\Jacques></p>
-              <p class="skills__dir">C:\\Users\\Jacques\\skills>dir</p>
-              <div class="skills_list">
-                  <div class="left">
-                      <p>HTML</p>
-                      <p>CSS</p>
-                      <p>SCSS & SASS</p>
-                      <p>JavaScript</p>
-        */
 
         typeWriter(
           "cd skills",
@@ -414,14 +381,12 @@ shortcuts.forEach((shortcut) => {
         addRemoveToTaskbar(document.querySelector(".skills__popup"));
       } else {
         toggleHiddenClass(document.querySelector(".skills__popup"));
-      }
-    });
-    shortcut.addEventListener("touchstart", (e) => {
-      if (!document.querySelector(".skills__popup")) {
-        skillsPopup(e.target);
-        addRemoveToTaskbar(document.querySelector(".skills__popup"));
-      } else {
-        toggleHiddenClass(document.querySelector(".skills__popup"));
+        const trayShortcut = taskbar.querySelector(
+          `[data-parent-class='${
+            document.querySelector(".skills__popup").classList[0]
+          }'`
+        );
+        trayShortcut.classList.toggle("minimized");
       }
     });
   }

@@ -128,7 +128,7 @@ html {
   margin-left: 10px;
 }
 
-.shortcut {
+.shortcut__container .shortcut {
   max-width: 150px;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -145,12 +145,12 @@ html {
   cursor: pointer;
 }
 
-.shortcut img {
+.shortcut__container .shortcut img {
   width: 64px;
   height: 64px;
 }
 
-.shortcut .shortcut__title {
+.shortcut__container .shortcut .shortcut__title {
   color: white;
   font-size: 0.9rem;
 }
@@ -204,11 +204,15 @@ html {
   width: 100%;
 }
 
-.menu .menu__item {
+.menu .shortcut {
   padding: 10px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -216,16 +220,16 @@ html {
   gap: 10px;
 }
 
-.menu .menu__item img {
+.menu .shortcut img {
   width: 32px;
   height: 32px;
 }
 
-.menu .menu__item span::first-letter {
+.menu .shortcut .shortcut__title::first-letter {
   text-decoration: underline;
 }
 
-.menu .menu__item:hover {
+.menu .shortcut:hover {
   cursor: default;
   background-color: blue;
   color: white;
@@ -451,7 +455,7 @@ html {
 .skills__popup {
   width: 600px;
   min-height: 400px;
-  overflow: visible;
+  overflow: hidden;
   background-color: black;
   border-left: 4px solid #dfdfdf;
   border-top: 4px solid #dfdfdf;
@@ -465,6 +469,10 @@ html {
 
 .skills__popup .popup__main__section__container .popup__main_section {
   margin-left: 0;
+}
+
+.skills__popup .popup__main__section__container .popup__main__text {
+  margin: 0 5px;
 }
 
 .skills__popup .popup__main__section__container .popup__main__text p {
@@ -491,8 +499,8 @@ html {
 }
 
 @media screen and (max-width: 1000px) {
-  body {
-    font-size: 0.7rem;
+  .taskbar {
+    font-size: 00.7rem;
   }
   .taskbar img {
     -webkit-transform: scale(0.8);
@@ -535,13 +543,27 @@ html {
     width: 200px;
     height: 200px;
   }
-  .shortcut img {
+  .shortcut__container .shortcut {
+    font-size: 0.7rem;
+  }
+  .shortcut__container .shortcut img {
     width: 32px;
     height: 32px;
   }
   .start__menu {
     width: 60vw;
     height: 60vh;
+  }
+  .skills__popup {
+    height: 50vh;
+  }
+  .skills__popup .popup__main__section__container {
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+  }
+  .skills__popup .popup__main__section__container .popup__main_section {
+    margin-top: 10px;
   }
 }
 

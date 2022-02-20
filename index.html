@@ -12,21 +12,23 @@
 <body>
 
     <div class="container">
-        <div class="shortcut draggable shortcut__my__computer">
-            <img class="shortcut__icon" src="/src/images/win95_icons/My Computer.ico" alt="">
-            <div class="shortcut__title">My Computer</div>
-        </div>
-        <div class="shortcut draggable shortcut__recycle__bin">
-            <img class="shortcut__icon" src="/src/images/win95_icons/Recycle Bin with paper.ico" alt="">
-            <div class="shortcut__title">Recycle Bin</div>
-        </div>
-        <div class="shortcut draggable shortcut__help">
-            <img class="shortcut__icon" src="/src/images/win95_icons/Help book.ico" alt="">
-            <div class="shortcut__title">Who am I?</div>
-        </div>
-        <div class="shortcut draggable shortcut__skills">
-            <img class="shortcut__icon" src="/src/images/win95_icons/MS-DOS logo.ico" alt="">
-            <div class="shortcut__title">skills.cmd</div>
+        <div class="shortcut__container">
+            <div class="shortcut draggable shortcut__my__computer">
+                <img class="shortcut__icon" src="/src/images/win95_icons/My Computer.ico" alt="">
+                <div class="shortcut__title">My Computer</div>
+            </div>
+            <div class="shortcut draggable shortcut__recycle__bin">
+                <img class="shortcut__icon" src="/src/images/win95_icons/Recycle Bin with paper.ico" alt="">
+                <div class="shortcut__title">Recycle Bin</div>
+            </div>
+            <div class="shortcut draggable shortcut__help">
+                <img class="shortcut__icon" src="/src/images/win95_icons/Help book.ico" alt="">
+                <div class="shortcut__title">Who am I?</div>
+            </div>
+            <div class="shortcut draggable shortcut__skills">
+                <img class="shortcut__icon" src="/src/images/win95_icons/MS-DOS logo.ico" alt="">
+                <div class="shortcut__title">skills.cmd</div>
+            </div>
         </div>
         <div class="start__menu hidden">
             <div class="left__text">Windows<span>95</span> </div>
@@ -40,9 +42,9 @@
                         <img src="/src/images/win95_icons/Web-documents folder 2.ico" alt="">
                         <span>Documents</span>
                     </div>
-                    <div class=" menu__item menu__find">
-                        <img src="/src/images/win95_icons/Search in sheet (16x16px & 32x32px) (blue).ico" alt="">
-                        <span>Find</span>
+                    <div class=" shortcut shortcut__skills">
+                        <img class="shortcut__icon" src="/src/images/win95_icons/MS-DOS logo.ico" alt="">
+                        <div class="shortcut__title">skills.cmd</div>
                     </div>
 
                 </div>
@@ -72,6 +74,33 @@
                 <span class="time">00:00</span>
             </div>
         </div>
+
+        <!--         <div class="email__popup draggable popup">
+            <div class="basic__window__top__container">
+                <div class="basic__window_top">
+                    <div class="basic__window__top__left">
+                        <img class="popup__icon" src="${icon.src}" alt="">
+                        <div class="popup__title">${title.innerText}</div>
+                    </div>
+                    <div class="basic__window__top__right">
+                        <div class="minimize__popup__button popup__button">
+                            <div class="minimize__box"></div>
+                        </div>
+                        <div class="close__popup__button popup__button">&#10006</div>
+                    </div>
+                </div>
+            </div>
+            <form action="mailto:someone@example.com" method="post" enctype="text/plain">
+                Name:<br>
+                <input type="text" name="name"><br>
+                E-mail:<br>
+                <input type="text" name="mail"><br>
+                Comment:<br>
+                <input type="text" name="comment" size="50"><br><br>
+                <input type="submit" value="Send">
+                <input type="reset" value="Reset">
+            </form>
+        </div> -->
 
     </div>
 
