@@ -43,6 +43,7 @@
   .start__menu {
     width: 60vw;
     height: 60vh;
+    font-size: 0.7rem;
   }
   .skills__popup {
     height: 50vh;
@@ -50,8 +51,68 @@
       justify-content: flex-start;
       .popup__main_section {
         margin-top: 10px;
+        .popup__main__text {
+          p {
+            font-size: 0.7rem;
+          }
+        }
       }
     }
+  }
+
+  .email__popup {
+    font-size: 0.8rem;
+    form {
+      .email__inputs {
+        input,
+        h2,
+        p,
+        div {
+          padding: 5px 5px;
+        }
+        input {
+          width: 70%;
+        }
+      }
+    }
+  }
+
+  .clippy__container {
+    display: flex;
+    position: absolute;
+    right: 50px;
+    bottom: 100px;
+    .box {
+      width: 200px;
+      font-size: 0.7rem;
+    }
+    img {
+      position: absolute;
+      right: -190px;
+      bottom: -170px;
+      transform: scale(0);
+      animation: 1s spin-in-media 0s linear forwards,
+        1s spin-out-media 5s linear forwards;
+    }
+  }
+}
+
+@keyframes spin-in-media {
+  0% {
+    transform: rotate(0deg) scale(0);
+  }
+
+  100% {
+    transform: rotate(720deg) scale(0.2);
+  }
+}
+@keyframes spin-out-media {
+  0% {
+    transform: rotate(720deg) scale(0.2);
+  }
+
+  100% {
+    transform: rotate(0deg) scale(0);
   }
 }
 

@@ -7,10 +7,6 @@
   width: 300px;
   height: 400px;
   background-color: $colorTaskBar;
-  border-left: 3px solid $colorLightGray;
-  border-top: 3px solid $colorLightGray;
-  border-right: 3px solid $colorDarkGray;
-  border-bottom: 3px solid $colorDarkGray;
   .left__text {
     transform: rotate(-180deg);
     background-color: $colorDarkGray;
@@ -56,8 +52,12 @@
   }
 }
 
+.menu__top {
+  padding-top: 5px;
+}
 .menu__bottom {
   border-top: 2px solid $colorDarkGray;
+  padding-bottom: 5px;
 
   &:before {
     background: $colorLightGray;

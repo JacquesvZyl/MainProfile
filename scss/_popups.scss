@@ -3,10 +3,6 @@
   left: 1%;
   top: 10%;
   max-width: 1000px;
-  border-left: 4px solid $colorLightGray;
-  border-top: 3px solid $colorLightGray;
-  border-right: 4px solid $colorDarkGray;
-  border-bottom: 3px solid $colorDarkGray;
 
   .basic__window_top {
     display: flex;
@@ -42,10 +38,6 @@
         height: 28px;
         margin: 5px 1px;
         background-color: $colorLightGray;
-        border-left: 3px solid $colorLightGray;
-        border-top: 3px solid $colorLightGray;
-        border-right: 3px solid $colorDarkGray;
-        border-bottom: 3px solid $colorDarkGray;
       }
 
       .minimize__box {
@@ -131,10 +123,6 @@
     .basic__window__bottom_rest {
       align-items: center;
       padding-left: 4px;
-      border-left: 2px solid $colorDarkGray;
-      border-top: 2px solid $colorDarkGray;
-      border-right: 2px solid $colorLightGray;
-      border-bottom: 2px solid $colorLightGray;
       img {
         height: 100%;
       }
@@ -153,10 +141,7 @@
   min-height: 400px;
   overflow: hidden;
   background-color: black;
-  border-left: 4px solid $colorLightGray;
-  border-top: 4px solid $colorLightGray;
-  border-right: 4px solid $colorLightGray;
-  border-bottom: 4px solid $colorLightGray;
+
   .popup__main__section__container {
     overflow-y: visible;
     .popup__main_section {
@@ -184,6 +169,100 @@
   }
 }
 
-/* .being__dragged {
-  pointer-events: none;
-} */
+.email__popup {
+  min-height: 80vh;
+  min-width: 50vw;
+  display: flex;
+  flex-direction: column;
+  form {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    .email__inputs {
+      background-color: #ffff;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      input,
+      h2,
+      p,
+      div {
+        padding: 10px 10px;
+        border-bottom: 1px solid black;
+      }
+      p span {
+        background-color: #9fa6f1;
+        border-radius: 5px;
+        padding: 5px 5px;
+      }
+
+      input {
+        border: none;
+        width: 80%;
+        font-size: 1rem;
+      }
+      #message {
+        padding: 10px 10px;
+        background-color: $colorLightGray;
+        font-size: 1.1rem;
+        flex: 1 1 auto;
+      }
+    }
+
+    .email__button__container {
+      padding: 5px 0px;
+      background-color: $colorLightGray;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      #status {
+        margin: 0 10px;
+        padding: 5px 5px;
+        &.success {
+          background-color: rgb(82, 204, 82);
+          animation: status 3s ease forwards;
+        }
+        &.error {
+          background-color: red;
+          color: #ffff;
+          animation: status 3s ease forwards;
+        }
+      }
+
+      @keyframes status {
+        0% {
+          opacity: 1;
+          pointer-events: all;
+        }
+        90% {
+          opacity: 1;
+          pointer-events: all;
+        }
+        100% {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+
+      #form__submit {
+        cursor: pointer;
+        background-color: $colorLightGray;
+        margin-left: 10px;
+        padding: 0px 10px;
+        display: flex;
+        align-items: center;
+        border-left: 3px solid #ffff;
+        border-top: 3px solid #ffff;
+        border-right: 3px solid $colorDarkGray;
+        border-bottom: 3px solid $colorDarkGray;
+        &:active {
+          background-color: #ffff;
+          border-left: 3px solid $colorDarkGray;
+          border-top: 3px solid $colorDarkGray;
+          border-right: 3px solid #ffff;
+          border-bottom: 3px solid #ffff;
+        }
+      }
+    }
+  }
+}

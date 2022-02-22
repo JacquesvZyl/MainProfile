@@ -31,9 +31,18 @@
                 <img class="shortcut__icon" src="/src/images/win95_icons/MS-DOS logo.ico" alt="">
                 <div class="shortcut__title">skills.cmd</div>
             </div>
+            <div class="shortcut draggable shortcut__contact">
+                <img class="shortcut__icon" src="/src/images/win95_icons/Mail.ico" alt="">
+                <div class="shortcut__title">Contact me</div>
+            </div>
+        </div>
+        <div class="clippy__container">
+            <div class="box sb4">Hi there! For more information, click on desktop shortcuts or the start menu!
+            </div>
+            <img src="./src/images/win95_icons/clippy.png" alt="">
         </div>
         <!--=================== START MENU =================== -->
-        <div class="start__menu hidden">
+        <div class="start__menu win95__border hidden">
             <div class="left__text">Windows<span>95</span> </div>
             <div class="menu">
                 <div class="menu__top">
@@ -52,6 +61,10 @@
                     <div class="shortcut shortcut__help">
                         <img class="shortcut__icon" src="/src/images/win95_icons/Help book.ico" alt="">
                         <div class="shortcut__title">Who am I?</div>
+                    </div>
+                    <div class="shortcut draggable shortcut__contact">
+                        <img class="shortcut__icon" src="/src/images/win95_icons/Mail.ico" alt="">
+                        <div class="shortcut__title">Contact me</div>
                     </div>
 
                 </div>
@@ -72,7 +85,7 @@
         </div>
         <!--=================== TASKBAR =================== -->
         <div class="taskbar">
-            <div class="start__btn">
+            <div class="start__btn win95__border">
                 <img src="./src/images/win95_icons/Start Logo 32x32.png" alt="">
                 <span>Start</span>
             </div>
@@ -83,32 +96,8 @@
             </div>
         </div>
 
-        <!--         <div class="email__popup draggable popup">
-            <div class="basic__window__top__container">
-                <div class="basic__window_top">
-                    <div class="basic__window__top__left">
-                        <img class="popup__icon" src="${icon.src}" alt="">
-                        <div class="popup__title">${title.innerText}</div>
-                    </div>
-                    <div class="basic__window__top__right">
-                        <div class="minimize__popup__button popup__button">
-                            <div class="minimize__box"></div>
-                        </div>
-                        <div class="close__popup__button popup__button">&#10006</div>
-                    </div>
-                </div>
-            </div>
-            <form action="mailto:someone@example.com" method="post" enctype="text/plain">
-                Name:<br>
-                <input type="text" name="name"><br>
-                E-mail:<br>
-                <input type="text" name="mail"><br>
-                Comment:<br>
-                <input type="text" name="comment" size="50"><br><br>
-                <input type="submit" value="Send">
-                <input type="reset" value="Reset">
-            </form>
-        </div> -->
+
+
 
     </div>
 

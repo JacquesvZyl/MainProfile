@@ -20,6 +20,20 @@ html {
   font-family: "MS Sans Serif", sans-serif;
 }
 
+.win95__border {
+  border-left: 3px solid #dfdfdf;
+  border-top: 3px solid #dfdfdf;
+  border-right: 3px solid #4b4b4b;
+  border-bottom: 3px solid #4b4b4b;
+}
+
+.win95__border__invert {
+  border-left: 3px solid #4b4b4b;
+  border-top: 3px solid #4b4b4b;
+  border-right: 3px solid #dfdfdf;
+  border-bottom: 3px solid #dfdfdf;
+}
+
 .container {
   overflow: hidden;
   display: -webkit-box;
@@ -59,10 +73,6 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-left: 3px solid #dfdfdf;
-  border-top: 3px solid #dfdfdf;
-  border-right: 3px solid #4b4b4b;
-  border-bottom: 3px solid #4b4b4b;
 }
 
 .taskbar .start__btn span {
@@ -92,12 +102,13 @@ html {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  border-left: 3px solid #4b4b4b;
-  border-top: 3px solid #4b4b4b;
-  border-right: 4px solid #dfdfdf;
-  border-bottom: 4px solid #dfdfdf;
   max-width: 280px;
   background-color: #e5e5e5;
+}
+
+.taskbar .taskbar__popup img {
+  width: 32px;
+  height: 32px;
 }
 
 .taskbar .taskbar__popup.minimized {
@@ -155,6 +166,139 @@ html {
   font-size: 0.9rem;
 }
 
+.clippy__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: absolute;
+  right: 60px;
+  bottom: 150px;
+}
+
+.clippy__container .box {
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  width: 300px;
+  margin: 50px auto;
+  font-family: "Calibri";
+  background: #f2f1c3;
+  padding: 10px;
+  position: relative;
+  -webkit-animation: 0.5s speechbubble-in 1s linear forwards, 0.5s speechbubble-out 5s linear forwards;
+          animation: 0.5s speechbubble-in 1s linear forwards, 0.5s speechbubble-out 5s linear forwards;
+}
+
+.clippy__container .box:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid #f2f1c3;
+  border-top: 10px solid #f2f1c3;
+  border-bottom: 10px solid transparent;
+  right: 19px;
+  bottom: -19px;
+}
+
+.clippy__container img {
+  position: absolute;
+  right: -190px;
+  bottom: -190px;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-animation: 1s spin-in 0s linear forwards, 1s spin-out 5s linear forwards;
+          animation: 1s spin-in 0s linear forwards, 1s spin-out 5s linear forwards;
+}
+
+@-webkit-keyframes spin-in {
+  0% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
+  }
+  100% {
+    -webkit-transform: rotate(720deg) scale(0.3);
+            transform: rotate(720deg) scale(0.3);
+  }
+}
+
+@keyframes spin-in {
+  0% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
+  }
+  100% {
+    -webkit-transform: rotate(720deg) scale(0.3);
+            transform: rotate(720deg) scale(0.3);
+  }
+}
+
+@-webkit-keyframes spin-out {
+  0% {
+    -webkit-transform: rotate(720deg) scale(0.3);
+            transform: rotate(720deg) scale(0.3);
+  }
+  100% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
+  }
+}
+
+@keyframes spin-out {
+  0% {
+    -webkit-transform: rotate(720deg) scale(0.3);
+            transform: rotate(720deg) scale(0.3);
+  }
+  100% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
+  }
+}
+
+@-webkit-keyframes speechbubble-in {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes speechbubble-in {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@-webkit-keyframes speechbubble-out {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
+@keyframes speechbubble-out {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+}
+
 .start__menu {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -166,10 +310,6 @@ html {
   width: 300px;
   height: 400px;
   background-color: #bfbfbf;
-  border-left: 3px solid #dfdfdf;
-  border-top: 3px solid #dfdfdf;
-  border-right: 3px solid #4b4b4b;
-  border-bottom: 3px solid #4b4b4b;
 }
 
 .start__menu .left__text {
@@ -235,8 +375,13 @@ html {
   color: white;
 }
 
+.menu__top {
+  padding-top: 5px;
+}
+
 .menu__bottom {
   border-top: 2px solid #4b4b4b;
+  padding-bottom: 5px;
 }
 
 .menu__bottom:before {
@@ -255,10 +400,6 @@ html {
   left: 1%;
   top: 10%;
   max-width: 1000px;
-  border-left: 4px solid #dfdfdf;
-  border-top: 3px solid #dfdfdf;
-  border-right: 4px solid #4b4b4b;
-  border-bottom: 3px solid #4b4b4b;
 }
 
 .popup .basic__window_top {
@@ -320,10 +461,6 @@ html {
   height: 28px;
   margin: 5px 1px;
   background-color: #dfdfdf;
-  border-left: 3px solid #dfdfdf;
-  border-top: 3px solid #dfdfdf;
-  border-right: 3px solid #4b4b4b;
-  border-bottom: 3px solid #4b4b4b;
 }
 
 .popup .basic__window_top .basic__window__top__right .minimize__box {
@@ -436,10 +573,6 @@ html {
       -ms-flex-align: center;
           align-items: center;
   padding-left: 4px;
-  border-left: 2px solid #4b4b4b;
-  border-top: 2px solid #4b4b4b;
-  border-right: 2px solid #dfdfdf;
-  border-bottom: 2px solid #dfdfdf;
 }
 
 .popup .basic__window__bottom__container .basic__window__bottom_left img,
@@ -457,10 +590,6 @@ html {
   min-height: 400px;
   overflow: hidden;
   background-color: black;
-  border-left: 4px solid #dfdfdf;
-  border-top: 4px solid #dfdfdf;
-  border-right: 4px solid #dfdfdf;
-  border-bottom: 4px solid #dfdfdf;
 }
 
 .skills__popup .popup__main__section__container {
@@ -498,9 +627,161 @@ html {
   color: yellow;
 }
 
-/* .being__dragged {
-  pointer-events: none;
-} */
+.email__popup {
+  min-height: 80vh;
+  min-width: 50vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.email__popup form {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.email__popup form .email__inputs {
+  background-color: #ffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.email__popup form .email__inputs input,
+.email__popup form .email__inputs h2,
+.email__popup form .email__inputs p,
+.email__popup form .email__inputs div {
+  padding: 10px 10px;
+  border-bottom: 1px solid black;
+}
+
+.email__popup form .email__inputs p span {
+  background-color: #9fa6f1;
+  border-radius: 5px;
+  padding: 5px 5px;
+}
+
+.email__popup form .email__inputs input {
+  border: none;
+  width: 80%;
+  font-size: 1rem;
+}
+
+.email__popup form .email__inputs #message {
+  padding: 10px 10px;
+  background-color: #dfdfdf;
+  font-size: 1.1rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 auto;
+          flex: 1 1 auto;
+}
+
+.email__popup form .email__button__container {
+  padding: 5px 0px;
+  background-color: #dfdfdf;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.email__popup form .email__button__container #status {
+  margin: 0 10px;
+  padding: 5px 5px;
+}
+
+.email__popup form .email__button__container #status.success {
+  background-color: #52cc52;
+  -webkit-animation: status 3s ease forwards;
+          animation: status 3s ease forwards;
+}
+
+.email__popup form .email__button__container #status.error {
+  background-color: red;
+  color: #ffff;
+  -webkit-animation: status 3s ease forwards;
+          animation: status 3s ease forwards;
+}
+
+@-webkit-keyframes status {
+  0% {
+    opacity: 1;
+    pointer-events: all;
+  }
+  90% {
+    opacity: 1;
+    pointer-events: all;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+@keyframes status {
+  0% {
+    opacity: 1;
+    pointer-events: all;
+  }
+  90% {
+    opacity: 1;
+    pointer-events: all;
+  }
+  100% {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.email__popup form .email__button__container #form__submit {
+  cursor: pointer;
+  background-color: #dfdfdf;
+  margin-left: 10px;
+  padding: 0px 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-left: 3px solid #ffff;
+  border-top: 3px solid #ffff;
+  border-right: 3px solid #4b4b4b;
+  border-bottom: 3px solid #4b4b4b;
+}
+
+.email__popup form .email__button__container #form__submit:active {
+  background-color: #ffff;
+  border-left: 3px solid #4b4b4b;
+  border-top: 3px solid #4b4b4b;
+  border-right: 3px solid #ffff;
+  border-bottom: 3px solid #ffff;
+}
+
 @media screen and (max-width: 1000px) {
   .taskbar {
     font-size: 00.7rem;
@@ -556,6 +837,7 @@ html {
   .start__menu {
     width: 60vw;
     height: 60vh;
+    font-size: 0.7rem;
   }
   .skills__popup {
     height: 50vh;
@@ -567,6 +849,86 @@ html {
   }
   .skills__popup .popup__main__section__container .popup__main_section {
     margin-top: 10px;
+  }
+  .skills__popup .popup__main__section__container .popup__main_section .popup__main__text p {
+    font-size: 0.7rem;
+  }
+  .email__popup {
+    font-size: 0.8rem;
+  }
+  .email__popup form .email__inputs input,
+  .email__popup form .email__inputs h2,
+  .email__popup form .email__inputs p,
+  .email__popup form .email__inputs div {
+    padding: 5px 5px;
+  }
+  .email__popup form .email__inputs input {
+    width: 70%;
+  }
+  .clippy__container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    position: absolute;
+    right: 50px;
+    bottom: 100px;
+  }
+  .clippy__container .box {
+    width: 200px;
+    font-size: 0.7rem;
+  }
+  .clippy__container img {
+    position: absolute;
+    right: -190px;
+    bottom: -170px;
+    -webkit-transform: scale(0);
+            transform: scale(0);
+    -webkit-animation: 1s spin-in-media 0s linear forwards, 1s spin-out-media 5s linear forwards;
+            animation: 1s spin-in-media 0s linear forwards, 1s spin-out-media 5s linear forwards;
+  }
+}
+
+@-webkit-keyframes spin-in-media {
+  0% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
+  }
+  100% {
+    -webkit-transform: rotate(720deg) scale(0.2);
+            transform: rotate(720deg) scale(0.2);
+  }
+}
+
+@keyframes spin-in-media {
+  0% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
+  }
+  100% {
+    -webkit-transform: rotate(720deg) scale(0.2);
+            transform: rotate(720deg) scale(0.2);
+  }
+}
+
+@-webkit-keyframes spin-out-media {
+  0% {
+    -webkit-transform: rotate(720deg) scale(0.2);
+            transform: rotate(720deg) scale(0.2);
+  }
+  100% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
+  }
+}
+
+@keyframes spin-out-media {
+  0% {
+    -webkit-transform: rotate(720deg) scale(0.2);
+            transform: rotate(720deg) scale(0.2);
+  }
+  100% {
+    -webkit-transform: rotate(0deg) scale(0);
+            transform: rotate(0deg) scale(0);
   }
 }
 

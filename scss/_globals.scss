@@ -9,3 +9,16 @@ html {
   font-size: $fontSize;
   font-family: $font;
 }
+
+.win95__border {
+  border-left: 3px solid $colorLightGray;
+  border-top: 3px solid $colorLightGray;
+  border-right: 3px solid $colorDarkGray;
+  border-bottom: 3px solid $colorDarkGray;
+}
+.win95__border__invert {
+  border-left: 3px solid $colorDarkGray;
+  border-top: 3px solid $colorDarkGray;
+  border-right: 3px solid $colorLightGray;
+  border-bottom: 3px solid $colorLightGray;
+}
