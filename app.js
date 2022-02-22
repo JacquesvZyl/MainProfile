@@ -4,12 +4,11 @@ const time = document.querySelector(".time");
 const container = document.querySelector(".container");
 const startMenuBtn = document.querySelector(".start__btn");
 const startMenu = document.querySelector(".start__menu");
-const shortcuts = document.querySelectorAll(".shortcut");
 const shorcutHelp = document.querySelector(".shortcut__help");
 const popupHelp = document.querySelector(".help__popup");
 const allPopups = document.getElementsByClassName(".popup");
 const taskbar = document.querySelector(".taskbar");
-// 2. GLOBAL VARIABLES
+// 2. VARIABLES
 let dragMovement = 0;
 const elementTypes = ["textarea", "input"];
 let active = false;
@@ -263,14 +262,14 @@ function whoAmiPopup(e) {
               <p>I'm a 36 year old self-taught front-end developer. Originally from Cape Town, South Africa,
                   I'm
                   currently living in Bangkok,
-                  Thailand with my wonderful wife since late 2020</p>
-              <p>In 2020 I was laid off from my job as an Application support engineer. I thought to myself
+                  Thailand with my wonderful wife since late 2020.</p>
+              <p>In 2020 I was retrenched from my job as an Application support engineer. I thought to myself
                   that this was the perfect opportunity to change my career path to something that I actually
                   enjoy...development!</p>
 
               <p>I have since taught myself the Unity engine and C# for game Development, mostly for fun and
                   out of curiosity.</p>
-              <p>One of my android games were actually <a target="_blank"
+              <p>One of my android games was actually <a target="_blank"
                       href="https://www.pocketgamer.com/golf-in-60-seconds/">nominated for best sport game of
                       2021 on PocketGamer.com.</a> </p>
               <p>I'm currently laser focused on web development and taught myself HTML, CSS, JavaScript,
@@ -379,110 +378,9 @@ function contactFormPopup(e) {
   container.insertAdjacentHTML("beforeend", html);
 }
 
-//// EVENT LISTENERS & FUNCTION EXECUTION
+//// 4. EVENT LISTENERS & FUNCTION EXECUTION //////
 
 container.addEventListener("click", (e) => {
-  // closes start menu if open while cliicking on desktop
-  if (e.target === container && !startMenu.classList.contains("hidden")) {
-    toggleHiddenClass(startMenu);
-    startMenuBtn.classList.toggle("clicked");
-  }
-});
-startMenuBtn.addEventListener("click", () => {
-  startMenuBtn.classList.toggle("clicked");
-  toggleHiddenClass(startMenu);
-});
-
-shortcuts.forEach((shortcut) => {
-  // Setting event listener for WHO AM I / Skills shortcut
-  if (shortcut.classList.contains("shortcut__help")) {
-    shortcut.addEventListener("click", (e) => {
-      if (dragMovement <= 10) {
-        if (!startMenu.classList.contains("hidden")) {
-          startMenuBtn.classList.toggle("clicked");
-          toggleHiddenClass(startMenu);
-        }
-        if (!document.querySelector(".help__popup")) {
-          whoAmiPopup(e.target);
-          addRemoveToTaskbar(document.querySelector(".help__popup"));
-        } else {
-          toggleHiddenClass(document.querySelector(".help__popup"));
-          const trayShortcut = taskbar.querySelector(
-            `[data-parent-class='${
-              document.querySelector(".help__popup").classList[0]
-            }'`
-          );
-          trayShortcut.classList.toggle("minimized");
-        }
-      }
-    });
-  }
-  // Setting up event listener for SKILLS shortcut
-  if (shortcut.classList.contains("shortcut__skills")) {
-    shortcut.addEventListener("click", (e) => {
-      if (dragMovement <= 10) {
-        if (!startMenu.classList.contains("hidden")) {
-          startMenuBtn.classList.toggle("clicked");
-          toggleHiddenClass(startMenu);
-        }
-        if (!document.querySelector(".skills__popup")) {
-          skillsPopup(e.target);
-          const skillsCd = document.querySelector(".skills__cd");
-          const skillsDr = document.querySelector(".skills__dir");
-          const skillsList = document.querySelector(".skills__list");
-          const skillsEnd = document.querySelector(".skills__end");
-          typeWriter("cd skills", skillsCd, 1000, 100);
-          delayedText("C:\\Users\\Jacques\\skills>", skillsDr, 2000, false);
-          typeWriter("dir", skillsDr, 2500, 300);
-          delayedText(skillsHtml, skillsList, 3400, true);
-          delayedText("C:\\Users\\Jacques\\skills>", skillsEnd, 3400, false);
-          addRemoveToTaskbar(document.querySelector(".skills__popup"));
-        } else {
-          toggleHiddenClass(document.querySelector(".skills__popup"));
-          const trayShortcut = taskbar.querySelector(
-            `[data-parent-class='${
-              document.querySelector(".skills__popup").classList[0]
-            }'`
-          );
-          trayShortcut.classList.toggle("minimized");
-        }
-      }
-    });
-  }
-  // Setting up event listener for CONTACT/EMAIL shortcut
-  if (shortcut.classList.contains("shortcut__contact")) {
-    shortcut.addEventListener("click", (e) => {
-      if (dragMovement <= 10) {
-        if (!startMenu.classList.contains("hidden")) {
-          startMenuBtn.classList.toggle("clicked");
-          toggleHiddenClass(startMenu);
-        }
-        if (!document.querySelector(".email__popup")) {
-          contactFormPopup(e.target);
-          addRemoveToTaskbar(document.querySelector(".email__popup"));
-        } else {
-          toggleHiddenClass(document.querySelector(".email__popup"));
-          const trayShortcut = taskbar.querySelector(
-            `[data-parent-class='${
-              document.querySelector(".email__popup").classList[0]
-            }'`
-          );
-          trayShortcut.classList.toggle("minimized");
-        }
-      }
-    });
-  }
-});
-
-/* container.addEventListener("touchstart", dragStart, false);
-container.addEventListener("touchend", dragEnd, false);
-container.addEventListener("touchmove", drag, false); */
-
-container.addEventListener("mousedown", dragStart, false);
-container.addEventListener("mouseup", dragEnd, false);
-container.addEventListener("mousemove", drag, false);
-
-document.addEventListener("click", (e) => {
   // adding event listener to dynamic popup close btns
   if (
     e.target.classList.contains("close__popup__button") ||
@@ -509,18 +407,127 @@ document.addEventListener("click", (e) => {
     toggleHiddenClass(parent);
   }
 
-  // adding event listener to contact form submiission btn
+  // adding event listener to contact form submission btn
   if (
     e.target.id === "form__submit" ||
     e.target.parentElement.id === "form__submit"
   ) {
     const form = document.getElementById("contact__form");
-    console.log(form);
     form.addEventListener("submit", (e) => {
       handleSubmit(e, form);
     });
   }
+
+  //// === SHORTCUT EVENT LISTENERS === ////
+  // SETTING EVENT LISTENER FOR WHO AM I / SKILLS SHORTCUT
+  if (e.target.closest(".shortcut__help")) {
+    const currentTarget = e.target.closest(".shortcut__help");
+    console.log(`=======${currentTarget}========`);
+    if (dragMovement <= 10) {
+      if (!startMenu.classList.contains("hidden")) {
+        startMenuBtn.classList.toggle("clicked");
+        toggleHiddenClass(startMenu);
+      }
+      // if element doesnt exist, create it, as well as taskbar shortcut
+      if (!document.querySelector(".help__popup")) {
+        console.log("cant find, creating");
+        whoAmiPopup(currentTarget);
+        addRemoveToTaskbar(document.querySelector(".help__popup"));
+      } else {
+        // if element DOES exist, but shortcut gets clicked again, toggle between hidden & displayed. Also toggle taskbar shortcut beween minimiized/maximized
+        toggleHiddenClass(document.querySelector(".help__popup"));
+        const trayShortcut = taskbar.querySelector(
+          `[data-parent-class='${
+            document.querySelector(".help__popup").classList[0]
+          }'`
+        );
+        trayShortcut.classList.toggle("minimized");
+      }
+    }
+  }
+
+  // SETTING UP EVENT LISTENER FOR SKILLS SHORTCUT
+  if (e.target.closest(".shortcut__skills")) {
+    const currentTarget = e.target.closest(".shortcut__skills");
+
+    if (dragMovement <= 10) {
+      if (!startMenu.classList.contains("hidden")) {
+        startMenuBtn.classList.toggle("clicked");
+        toggleHiddenClass(startMenu);
+      }
+      if (!document.querySelector(".skills__popup")) {
+        skillsPopup(currentTarget);
+        const skillsCd = document.querySelector(".skills__cd");
+        const skillsDr = document.querySelector(".skills__dir");
+        const skillsList = document.querySelector(".skills__list");
+        const skillsEnd = document.querySelector(".skills__end");
+        typeWriter("cd skills", skillsCd, 1000, 100);
+        delayedText("C:\\Users\\Jacques\\skills>", skillsDr, 2000, false);
+        typeWriter("dir", skillsDr, 2500, 300);
+        delayedText(skillsHtml, skillsList, 3400, true);
+        delayedText("C:\\Users\\Jacques\\skills>", skillsEnd, 3400, false);
+        addRemoveToTaskbar(document.querySelector(".skills__popup"));
+      } else {
+        toggleHiddenClass(document.querySelector(".skills__popup"));
+        const trayShortcut = taskbar.querySelector(
+          `[data-parent-class='${
+            document.querySelector(".skills__popup").classList[0]
+          }'`
+        );
+        trayShortcut.classList.toggle("minimized");
+      }
+    }
+  }
+
+  // SETTING UP EVENT LISTENER FOR CONTACT/EMAIL SHORTCUT
+  if (e.target.closest(".shortcut__contact")) {
+    const currentTarget = e.target.closest(".shortcut__contact");
+
+    if (dragMovement <= 10) {
+      if (!startMenu.classList.contains("hidden")) {
+        startMenuBtn.classList.toggle("clicked");
+        toggleHiddenClass(startMenu);
+      }
+      if (!document.querySelector(".email__popup")) {
+        contactFormPopup(currentTarget);
+        addRemoveToTaskbar(document.querySelector(".email__popup"));
+      } else {
+        toggleHiddenClass(document.querySelector(".email__popup"));
+        const trayShortcut = taskbar.querySelector(
+          `[data-parent-class='${
+            document.querySelector(".email__popup").classList[0]
+          }'`
+        );
+        trayShortcut.classList.toggle("minimized");
+      }
+    }
+  }
+
+  // SETTING UP START BTN EVENT LISTENER;
+  if (e.target.closest(".start__btn")) {
+    const currentTarget = e.target.closest(".start__btn");
+    currentTarget.classList.toggle("clicked");
+    toggleHiddenClass(startMenu);
+  }
+
+  // CLOSES START MENU IF OPEN WHILE CLICKING ON DESKTOP
+  if (e.target === container && !startMenu.classList.contains("hidden")) {
+    toggleHiddenClass(startMenu);
+    startMenuBtn.classList.toggle("clicked");
+  }
 });
+
+/* startMenuBtn.addEventListener("click", () => {
+  startMenuBtn.classList.toggle("clicked");
+  toggleHiddenClass(startMenu);
+}); */
+/* container.addEventListener("touchstart", dragStart, false);
+container.addEventListener("touchend", dragEnd, false);
+container.addEventListener("touchmove", drag, false); */
+
+container.addEventListener("mousedown", dragStart, false);
+container.addEventListener("mouseup", dragEnd, false);
+container.addEventListener("mousemove", drag, false);
 
 setTime();
 

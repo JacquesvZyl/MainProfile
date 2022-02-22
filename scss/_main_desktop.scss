@@ -77,6 +77,8 @@
 }
 
 .shortcut__container {
+  display: inline-block;
+  max-width: 200px;
   .shortcut {
     max-width: 150px;
     align-items: center;

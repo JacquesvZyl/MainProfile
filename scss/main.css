@@ -139,6 +139,11 @@ html {
   margin-left: 10px;
 }
 
+.shortcut__container {
+  display: inline-block;
+  max-width: 200px;
+}
+
 .shortcut__container .shortcut {
   max-width: 150px;
   -webkit-box-align: center;
