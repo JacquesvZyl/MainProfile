@@ -516,7 +516,7 @@ container.addEventListener("mousemove", drag);
 // sets clippy container to hidden after animation has played
 setTimeout(() => {
   document.querySelector(".clippy__container").classList.add("hidden");
-}, 6000);
+}, 10000);
 
 // set Taskbar clock
 setTime();

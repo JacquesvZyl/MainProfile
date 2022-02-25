@@ -189,8 +189,8 @@ html {
   background: #f2f1c3;
   padding: 10px;
   position: relative;
-  -webkit-animation: 0.5s speechbubble-in 1s linear forwards, 0.5s speechbubble-out 5s linear forwards;
-          animation: 0.5s speechbubble-in 1s linear forwards, 0.5s speechbubble-out 5s linear forwards;
+  -webkit-animation: 0.5s speechbubble-in 4s linear forwards, 0.5s speechbubble-out 8s linear forwards;
+          animation: 0.5s speechbubble-in 4s linear forwards, 0.5s speechbubble-out 8s linear forwards;
 }
 
 .clippy__container .box:before {
@@ -212,8 +212,8 @@ html {
   bottom: -190px;
   -webkit-transform: scale(0);
           transform: scale(0);
-  -webkit-animation: 1s spin-in 0s linear forwards, 1s spin-out 5s linear forwards;
-          animation: 1s spin-in 0s linear forwards, 1s spin-out 5s linear forwards;
+  -webkit-animation: 1s spin-in 2.5s linear forwards, 1s spin-out 9s linear forwards;
+          animation: 1s spin-in 2.5s linear forwards, 1s spin-out 9s linear forwards;
 }
 
 @-webkit-keyframes spin-in {
@@ -888,8 +888,8 @@ html {
     bottom: -170px;
     -webkit-transform: scale(0);
             transform: scale(0);
-    -webkit-animation: 1s spin-in-media 0s linear forwards, 1s spin-out-media 5s linear forwards;
-            animation: 1s spin-in-media 0s linear forwards, 1s spin-out-media 5s linear forwards;
+    -webkit-animation: 1s spin-in-media 2.5s linear forwards, 1s spin-out-media 9s linear forwards;
+            animation: 1s spin-in-media 2.5s linear forwards, 1s spin-out-media 9s linear forwards;
   }
 }
 

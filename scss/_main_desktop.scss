@@ -112,8 +112,8 @@
     background: #f2f1c3;
     padding: 10px;
     position: relative;
-    animation: 0.5s speechbubble-in 1s linear forwards,
-      0.5s speechbubble-out 5s linear forwards;
+    animation: 0.5s speechbubble-in 4s linear forwards,
+      0.5s speechbubble-out 8s linear forwards;
 
     &:before {
       content: "";
@@ -134,7 +134,7 @@
     bottom: -190px;
     transform: scale(0);
 
-    animation: 1s spin-in 0s linear forwards, 1s spin-out 5s linear forwards;
+    animation: 1s spin-in 2.5s linear forwards, 1s spin-out 9s linear forwards;
   }
 }
 
