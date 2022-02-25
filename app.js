@@ -68,7 +68,7 @@ async function handleSubmit(event, form) {
       status.innerHTML = "Oops! There was a problem submitting your form";
     });
 
-  form.addEventListener("submit", handleSubmit);
+  //form.addEventListener("submit", handleSubmit);
 }
 
 // delayed text Display
@@ -232,8 +232,7 @@ function whoAmiPopup(e) {
   const eventTarget = e.closest(".shortcut");
   const title = eventTarget.querySelector(".shortcut__title");
   const icon = eventTarget.querySelector(".shortcut__icon");
-  if (!document.querySelector(".help__popup")) {
-    html = `<div class="help__popup draggable popup win95__border">
+  html = `<div class="help__popup draggable popup win95__border">
   <div class="basic__window__top__container">
       <div class="basic__window_top">
           <div class="basic__window__top__left">
@@ -290,8 +289,7 @@ function whoAmiPopup(e) {
   </div>
 </div>`;
 
-    container.insertAdjacentHTML("beforeend", html);
-  }
+  container.insertAdjacentHTML("beforeend", html);
 }
 
 function skillsPopup(e) {
@@ -381,11 +379,21 @@ function contactFormPopup(e) {
 //// 4. EVENT LISTENERS & FUNCTION EXECUTION //////
 
 container.addEventListener("click", (e) => {
+  // SETTING UP START BTN EVENT LISTENER;
+  if (e.target.closest(".start__btn")) {
+    const currentTarget = e.target.closest(".start__btn");
+    currentTarget.classList.toggle("clicked");
+    toggleHiddenClass(startMenu);
+  }
+
+  // CLOSES START MENU IF OPEN WHILE CLICKING ON DESKTOP
+  if (e.target === container && !startMenu.classList.contains("hidden")) {
+    toggleHiddenClass(startMenu);
+    startMenuBtn.classList.toggle("clicked");
+  }
+
   // adding event listener to dynamic popup close btns
-  if (
-    e.target.classList.contains("close__popup__button") ||
-    e.target.parentElement.classList.contains("close__popup__button")
-  ) {
+  if (e.target.closest(".close__popup__button")) {
     const parent = e.target.closest(".popup");
     const trayShortcut = taskbar.querySelector(
       `[data-parent-class='${parent.classList[0]}'`
@@ -395,10 +403,7 @@ container.addEventListener("click", (e) => {
   }
 
   // adding event listener to dynamic popup minimize btns
-  if (
-    e.target.classList.contains("minimize__popup__button") ||
-    e.target.parentElement.classList.contains("minimize__popup__button")
-  ) {
+  if (e.target.closest(".minimize__popup__button")) {
     const parent = e.target.closest(".popup");
     const trayShortcut = taskbar.querySelector(
       `[data-parent-class='${parent.classList[0]}'`
@@ -408,10 +413,7 @@ container.addEventListener("click", (e) => {
   }
 
   // adding event listener to contact form submission btn
-  if (
-    e.target.id === "form__submit" ||
-    e.target.parentElement.id === "form__submit"
-  ) {
+  if (e.target.closest("#form__submit")) {
     const form = document.getElementById("contact__form");
     form.addEventListener("submit", (e) => {
       handleSubmit(e, form);
@@ -419,11 +421,14 @@ container.addEventListener("click", (e) => {
   }
 
   //// === SHORTCUT EVENT LISTENERS === ////
-  // SETTING EVENT LISTENER FOR WHO AM I / SKILLS SHORTCUT
-  if (e.target.closest(".shortcut__help")) {
-    const currentTarget = e.target.closest(".shortcut__help");
-    console.log(`=======${currentTarget}========`);
-    if (dragMovement <= 10) {
+
+  // dragMovement ensures that shortcut doesnt get clicked after drag
+  if (dragMovement <= 10) {
+    // SETTING EVENT LISTENER FOR WHO AM I / SKILLS SHORTCUT
+    if (e.target.closest(".shortcut__help")) {
+      const currentTarget = e.target.closest(".shortcut__help");
+      console.log(`=======${currentTarget}========`);
+
       if (!startMenu.classList.contains("hidden")) {
         startMenuBtn.classList.toggle("clicked");
         toggleHiddenClass(startMenu);
@@ -444,17 +449,16 @@ container.addEventListener("click", (e) => {
         trayShortcut.classList.toggle("minimized");
       }
     }
-  }
 
-  // SETTING UP EVENT LISTENER FOR SKILLS SHORTCUT
-  if (e.target.closest(".shortcut__skills")) {
-    const currentTarget = e.target.closest(".shortcut__skills");
+    // SETTING UP EVENT LISTENER FOR SKILLS SHORTCUT
+    if (e.target.closest(".shortcut__skills")) {
+      const currentTarget = e.target.closest(".shortcut__skills");
 
-    if (dragMovement <= 10) {
       if (!startMenu.classList.contains("hidden")) {
         startMenuBtn.classList.toggle("clicked");
         toggleHiddenClass(startMenu);
       }
+      // if element doesnt exist, create it, as well as taskbar shortcut
       if (!document.querySelector(".skills__popup")) {
         skillsPopup(currentTarget);
         const skillsCd = document.querySelector(".skills__cd");
@@ -468,6 +472,7 @@ container.addEventListener("click", (e) => {
         delayedText("C:\\Users\\Jacques\\skills>", skillsEnd, 3400, false);
         addRemoveToTaskbar(document.querySelector(".skills__popup"));
       } else {
+        // if element DOES exist, but shortcut gets clicked again, toggle between hidden & displayed. Also toggle taskbar shortcut beween minimiized/maximized
         toggleHiddenClass(document.querySelector(".skills__popup"));
         const trayShortcut = taskbar.querySelector(
           `[data-parent-class='${
@@ -477,21 +482,21 @@ container.addEventListener("click", (e) => {
         trayShortcut.classList.toggle("minimized");
       }
     }
-  }
 
-  // SETTING UP EVENT LISTENER FOR CONTACT/EMAIL SHORTCUT
-  if (e.target.closest(".shortcut__contact")) {
-    const currentTarget = e.target.closest(".shortcut__contact");
+    // SETTING UP EVENT LISTENER FOR CONTACT/EMAIL SHORTCUT
+    if (e.target.closest(".shortcut__contact")) {
+      const currentTarget = e.target.closest(".shortcut__contact");
 
-    if (dragMovement <= 10) {
       if (!startMenu.classList.contains("hidden")) {
         startMenuBtn.classList.toggle("clicked");
         toggleHiddenClass(startMenu);
       }
+      // if element doesnt exist, create it, as well as taskbar shortcut
       if (!document.querySelector(".email__popup")) {
         contactFormPopup(currentTarget);
         addRemoveToTaskbar(document.querySelector(".email__popup"));
       } else {
+        // if element DOES exist, but shortcut gets clicked again, toggle between hidden & displayed. Also toggle taskbar shortcut beween minimiized/maximized
         toggleHiddenClass(document.querySelector(".email__popup"));
         const trayShortcut = taskbar.querySelector(
           `[data-parent-class='${
@@ -502,36 +507,16 @@ container.addEventListener("click", (e) => {
       }
     }
   }
-
-  // SETTING UP START BTN EVENT LISTENER;
-  if (e.target.closest(".start__btn")) {
-    const currentTarget = e.target.closest(".start__btn");
-    currentTarget.classList.toggle("clicked");
-    toggleHiddenClass(startMenu);
-  }
-
-  // CLOSES START MENU IF OPEN WHILE CLICKING ON DESKTOP
-  if (e.target === container && !startMenu.classList.contains("hidden")) {
-    toggleHiddenClass(startMenu);
-    startMenuBtn.classList.toggle("clicked");
-  }
 });
 
-/* startMenuBtn.addEventListener("click", () => {
-  startMenuBtn.classList.toggle("clicked");
-  toggleHiddenClass(startMenu);
-}); */
-/* container.addEventListener("touchstart", dragStart, false);
-container.addEventListener("touchend", dragEnd, false);
-container.addEventListener("touchmove", drag, false); */
-
-container.addEventListener("mousedown", dragStart, false);
-container.addEventListener("mouseup", dragEnd, false);
-container.addEventListener("mousemove", drag, false);
-
-setTime();
+container.addEventListener("mousedown", dragStart);
+container.addEventListener("mouseup", dragEnd);
+container.addEventListener("mousemove", drag);
 
 // sets clippy container to hidden after animation has played
 setTimeout(() => {
   document.querySelector(".clippy__container").classList.add("hidden");
 }, 6000);
+
+// set Taskbar clock
+setTime();
