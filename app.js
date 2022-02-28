@@ -39,6 +39,7 @@ class App {
     container.addEventListener("click", this._newPopup.bind(this));
     container.addEventListener("click", this._toggleTaskbarMinimize.bind(this));
     container.addEventListener("click", this._togglePopupMinimize.bind(this));
+    container.addEventListener("click", this._toggleStartMenu.bind(this));
     container.addEventListener("click", this._closePopup.bind(this));
     container.addEventListener("submit", this._handleFormSubmit.bind(this));
     this._setTime();
@@ -73,7 +74,52 @@ class App {
     element.classList.toggle("minimized");
   }
 
+  _toggleStartMenu(e) {
+    if (e.target.closest(".start__btn")) {
+      this._toggleHiddenClass(startMenu);
+    } else {
+      if (!startMenu.classList.contains("hidden"))
+        this._toggleHiddenClass(startMenu);
+    }
+  }
+
   _newPopup(e) {
+    function addToTaskbar(popupName, icon, title) {
+      const popup = document.querySelector(popupName);
+      console.dir(popup);
+      // Add to taskbar id popup if visible
+      if (popup && !popup.classList.contains("hidden")) {
+        //prettier-ignore
+        const html = `<div class="taskbar__popup win95__border__clicked close" data-parent="${popup.classList[0]}">
+      <img src=${icon.src} alt="">
+      <span>${title.innerText}</span>
+    </div>`;
+        startMenuBtn.insertAdjacentHTML("afterend", html);
+      }
+    }
+    // delayed text Display
+    async function delayedText(txt, element, waitTime, isHTML) {
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
+
+      isHTML
+        ? element.insertAdjacentHTML("beforeend", txt)
+        : (element.textContent = txt);
+    }
+
+    // Typing animation
+    async function typeWriter(txt, element, waitTime, typeSpeed) {
+      let i = 0;
+      function type() {
+        if (i < txt.length) {
+          element.textContent += txt.charAt(i);
+          i++;
+          setTimeout(type, typeSpeed);
+        }
+      }
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
+      type();
+    }
+
     if (e.target.closest(".shortcut")) {
       const eventTarget = e.target.closest(".shortcut");
       const title = eventTarget.querySelector(".shortcut__title");
@@ -217,36 +263,22 @@ class App {
       //only create popup if it doesnt currently exist && if its currently not being dragged
       if (!document.querySelector(this.#popup) && this.#dragMovement <= 10) {
         container.insertAdjacentHTML("beforeend", this.#html);
-        this._addToTaskbar(this.#popup, icon, title);
+        addToTaskbar(this.#popup, icon, title);
         // if the popup is the skills popup, run animations
         if (this.#popup === ".skills__popup") {
           const skillsCd = document.querySelector(".skills__cd");
           const skillsDr = document.querySelector(".skills__dir");
           const skillsList = document.querySelector(".skills__list");
           const skillsEnd = document.querySelector(".skills__end");
-          this._typeWriter("cd skills", skillsCd, 1000, 100);
+          typeWriter("cd skills", skillsCd, 1000, 100);
           //prettier-ignore
-          this._delayedText("C:\\Users\\Jacques\\skills>",skillsDr,2000,false);
-          this._typeWriter("dir", skillsDr, 2500, 300);
-          this._delayedText(this.#skillsHtml, skillsList, 3400, true);
+          delayedText("C:\\Users\\Jacques\\skills>",skillsDr,2000,false);
+          typeWriter("dir", skillsDr, 2500, 300);
+          delayedText(this.#skillsHtml, skillsList, 3400, true);
           //prettier-ignore
-          this._delayedText("C:\\Users\\Jacques\\skills>",skillsEnd,3400,false);
+          delayedText("C:\\Users\\Jacques\\skills>",skillsEnd,3400,false);
         }
       }
-    }
-  }
-
-  _addToTaskbar(popupName, icon, title) {
-    const popup = document.querySelector(popupName);
-    console.dir(popup);
-    // Add to taskbar id popup if visible
-    if (popup && !popup.classList.contains("hidden")) {
-      //prettier-ignore
-      const html = `<div class="taskbar__popup win95__border__clicked close" data-parent="${popup.classList[0]}">
-    <img src=${icon.src} alt="">
-    <span>${this._textTruncate(title.innerText, 20)}</span>
-  </div>`;
-      startMenuBtn.insertAdjacentHTML("afterend", html);
     }
   }
 
@@ -282,7 +314,7 @@ class App {
   }
 
   _dragStart(e) {
-    // only prevent default if target is not an input, otherwise focus on click wont work
+    // only prevent default if target is not an input or textarea, otherwise focus on click wont work
     if (!this.#elementTypes.includes(e.target.localName)) e.preventDefault();
 
     this.#dragMovement = 0;
@@ -304,6 +336,10 @@ class App {
   }
 
   _drag(e) {
+    function setTranslate(xPos, yPos, el) {
+      el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+    }
+
     if (this.#active) {
       //adding to dragMovement var when dragged. Ths variable can then be used later to prevent a click event to trigger after drag
       this.#dragMovement++;
@@ -313,7 +349,7 @@ class App {
       this.#activeItem.yOffset = this.#activeItem.currentY =
         e.clientY - this.#activeItem.initialY;
 
-      this._setTranslate(
+      setTranslate(
         this.#activeItem.currentX,
         this.#activeItem.currentY,
         this.#activeItem
@@ -348,48 +384,6 @@ class App {
         item.classList.add("being__dragged");
         return item;
       }
-    }
-  }
-
-  _setTranslate(xPos, yPos, el) {
-    el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
-  }
-
-  // delayed text Display
-  async _delayedText(txt, element, waitTime, isHTML) {
-    await new Promise((resolve) => setTimeout(resolve, waitTime));
-
-    isHTML
-      ? element.insertAdjacentHTML("beforeend", txt)
-      : (element.textContent = txt);
-  }
-
-  // Typing animation
-  async _typeWriter(txt, element, waitTime, typeSpeed) {
-    let i = 0;
-    function type() {
-      if (i < txt.length) {
-        element.textContent += txt.charAt(i);
-        i++;
-        setTimeout(type, typeSpeed);
-      }
-    }
-    await new Promise((resolve) => setTimeout(resolve, waitTime));
-    type();
-  }
-
-  // truncate Long strings
-  _textTruncate(str, length, ending) {
-    if (length == null) {
-      length = 100;
-    }
-    if (ending == null) {
-      ending = "...";
-    }
-    if (str.length > length) {
-      return str.substring(0, length - ending.length) + ending;
-    } else {
-      return str;
     }
   }
 
